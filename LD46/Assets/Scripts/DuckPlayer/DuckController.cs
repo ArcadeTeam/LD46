@@ -8,8 +8,10 @@ public class DuckController : Duck
     public float Speed = 1f;
     public float JumpHeight = 4f;
 
-    public float DashForce = 5f;
-    public float timeBetweenDash = 3f;
+    public float SprintSpeed = 2f;
+    public float SprintTime = 1.5f;
+    public float timeBetweenSprint = 3f;
+    private float lastSprintTime = -999f;
 
     public LayerMask Ground;
     
@@ -21,7 +23,6 @@ public class DuckController : Duck
     private CameraFollower cameraFollower;
 
     public List<BabyDuckController> nearBabies;
-    private float lastDash = -999f;
 
     private Vector3 ori1;
     private Vector3 ori2;
@@ -58,6 +59,7 @@ public class DuckController : Duck
     }
 
     void Update() {
+
         if (!dead)
         {
             //applying gravity
@@ -113,11 +115,10 @@ public class DuckController : Duck
             }
 
             //dash logic
-            if (Input.GetButtonDown("Fire1")) {
-                if (Time.fixedTime - lastDash >= timeBetweenDash)
+            if (Input.GetButtonDown("Fire1") && _isGrounded) {
+                if (Time.fixedTime - lastSprintTime >= timeBetweenSprint)
                 {
-                    lastDash = Time.fixedTime;
-                    _body.AddForce(transform.forward.normalized * DashForce, ForceMode.Impulse);
+                    lastSprintTime = Time.fixedTime;
                 }
             }
 
@@ -127,7 +128,21 @@ public class DuckController : Duck
                     baby.GoWithMom(transform);
                 }
             }
+
         }
+        else
+        {
+            lastSprintTime = -999f;
+            planning = false;
+            _body.AddForce(Physics.gravity * (_body.mass * _body.mass));
+        }
+
+
+    }
+
+    private bool isSprinting()
+    {
+        return (Time.fixedTime - lastSprintTime < SprintTime);
     }
 
     private void checkOnFloor() 
@@ -149,13 +164,17 @@ public class DuckController : Duck
     {
         if (!dead)
         {
+            var speed = Speed;
+            if (isSprinting()) speed = SprintSpeed;
+
             var orientation = orientatedInput;
             if (!_isGrounded) orientation = Vector3.Lerp(orientation, lastOrientationWhenGrounded, 0.25f);
-            _body.MovePosition(_body.position + orientation * Speed * Time.fixedDeltaTime);
+            _body.MovePosition(_body.position + orientation * speed * Time.fixedDeltaTime);
         }
         else
         {
             if (_body.velocity.y == 0) _body.velocity = new Vector3(_body.velocity.x * 0.9f, 0f, _body.velocity.z * 0.9f);
+            if (_body.velocity.magnitude < 1f) _body.angularVelocity = Vector3.zero;
         }
 
     }
