@@ -36,10 +36,15 @@ public class BabyDuckController : MonoBehaviour
             agent.destination = other.transform.position + dir * 3;
             destination = null;
         }
+
+        if (other.CompareTag("Player")) {
+            other.gameObject.GetComponent<DuckController>().nearBabies.Add(this);
+        }
     }
 
     private void OnTriggerExit(Collider other) {
-        //if (other.CompareTag("Human"))
-            
+        if (other.CompareTag("Player")) {
+            other.gameObject.GetComponent<DuckController>().nearBabies.Remove(this);
+        }
     }
 }

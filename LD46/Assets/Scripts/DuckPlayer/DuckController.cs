@@ -17,6 +17,8 @@ public class DuckController : MonoBehaviour
     private bool dead = false;
     private CameraFollower cameraFollower;
 
+    public List<BabyDuckController> nearBabies;
+
 
     void Start()
     {
@@ -89,6 +91,15 @@ public class DuckController : MonoBehaviour
             {
                 _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
             }
+
+            if (Input.GetButtonDown("Fire1")) {
+
+            }
+            if (Input.GetButtonDown("Fire2")) {
+                foreach(BabyDuckController baby in nearBabies) {
+                    baby.GoWithMom(transform);
+                }
+            }
         }
 
     }
@@ -120,4 +131,6 @@ public class DuckController : MonoBehaviour
         }
 
     }
+
+
 }

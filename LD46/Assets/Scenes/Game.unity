@@ -5294,7 +5294,7 @@ PrefabInstance:
         type: 3}
       propertyPath: destination
       value: 
-      objectReference: {fileID: 1870956927}
+      objectReference: {fileID: 0}
     - target: {fileID: 1450258019530243819, guid: 3be40893e8669bf4e851f5ebc2f186a5,
         type: 3}
       propertyPath: destination.y
@@ -5573,24 +5573,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1870956923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870956921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998a27896305eb948b00dd70dc410342, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1870956927 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5419197964169617230, guid: 669527c5a70af944eb70677ba0058353,
-    type: 3}
-  m_PrefabInstance: {fileID: 1747635447}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1881518342
 GameObject:
   m_ObjectHideFlags: 0
