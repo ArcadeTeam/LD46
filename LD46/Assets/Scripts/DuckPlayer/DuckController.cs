@@ -183,12 +183,10 @@ public class DuckController : Duck
     public void AddBaby(BabyDuckController baby)
     {
         nearBabies.Add(baby);
-        Debug.Log(nearBabies.Count);
     }
 
     public void RemoveBaby(BabyDuckController baby)
     {
         nearBabies.Remove(baby);
-        Debug.Log(nearBabies.Count);
     }
 }
