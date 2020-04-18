@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,10 @@ public class DuckController : MonoBehaviour
     private float lastDash = -999f;
 
 
+    private Vector3 ori1;
+    private Vector3 ori2;
+    private float oriTime2;
+
     void Start()
     {
         _body = GetComponent<Rigidbody>();
@@ -47,7 +52,9 @@ public class DuckController : MonoBehaviour
         transform.position = position;
         resetDuckAlignment();
         cameraFollower.fastMoveToDuck();
-
+        ori1 = position;
+        ori2 = position;
+        oriTime2 = 0;
     }
 
     private void resetDuckAlignment()
@@ -58,7 +65,6 @@ public class DuckController : MonoBehaviour
     }
 
     void Update() {
-
 
 
         if (!dead)
@@ -74,8 +80,15 @@ public class DuckController : MonoBehaviour
                 var camPos2 = new Vector3(cameraPos.x, 0, cameraPos.z);
                 transform.forward = camPos2;
                 orientatedInput = transform.localRotation * _inputs;
-                transform.forward = orientatedInput;
 
+                if ((Time.fixedTime - oriTime2) * 7 > 1)
+                {
+                    ori1 = ori2;
+                    ori2 = orientatedInput;
+                    oriTime2 = Time.fixedTime;
+                }
+
+                transform.forward = Vector3.Slerp(ori1, ori2, (Time.fixedTime- oriTime2) *7);
             }
             else orientatedInput = Vector3.zero;
 
@@ -85,7 +98,6 @@ public class DuckController : MonoBehaviour
             }
 
             if (Input.GetButtonDown("Fire1")) {
-                Debug.Log(Time.fixedTime - lastDash);
                 if (Time.fixedTime - lastDash >= timeBetweenDash)
                 {
                     lastDash = Time.fixedTime;
@@ -98,7 +110,6 @@ public class DuckController : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void checkOnFloor() 
