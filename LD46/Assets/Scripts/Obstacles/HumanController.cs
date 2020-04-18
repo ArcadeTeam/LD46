@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class HumanController : MonoBehaviour
 {
-
+    public BoxCollider area;
     private float walkRadius;
     private float changePathTimeout = 5f;
     private float walkThreshold = 2f;
@@ -29,7 +29,12 @@ public class HumanController : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, lastPosition) < walkThreshold)
         {
-            agent.destination = GetRandomPoint();
+            var nextPosition = GetRandomPoint();
+            if (nextPosition.x != Mathf.Infinity)
+            {
+                Debug.Log(nextPosition);
+                agent.destination = nextPosition;
+            }
         }
 
         lastPosition = transform.position;
@@ -38,12 +43,22 @@ public class HumanController : MonoBehaviour
 
     private Vector3 GetRandomPoint()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
-        randomDirection += transform.position;
+        if (area != null)
+        {
+            Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            randomPos = area.transform.TransformPoint(randomPos * .5f);
 
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
+            return randomPos;
+        }
+        else
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
+            randomDirection += transform.position;
 
-        return hit.position;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
+
+            return hit.position;
+        }
     }
 }
