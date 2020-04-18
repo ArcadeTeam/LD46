@@ -5,9 +5,10 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: CrystalCampoFuerza
-  m_Shader: {fileID: 4800000, guid: 9084664a0715deb4488cd579fe420dc3, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0be72c04bae6cb5469de9276dde45da5, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -76,20 +77,52 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _InvFade: 3
+    - _LightSmoothness: 0
+    - _LightThreshold: 0.3
+    - _MKEditorShowDetailBehavior: 0
+    - _MKEditorShowDissolveBehavior: 0
+    - _MKEditorShowLightBehavior: 0
+    - _MKEditorShowMainBehavior: 1
+    - _MKEditorShowOutlineBehavior: 0
+    - _MKEditorShowReflectionBehavior: 0
+    - _MKEditorShowRenderBehavior: 0
+    - _MKEditorShowRimBehavior: 0
+    - _MKEditorShowShadowBehavior: 0
+    - _MKEditorShowSketchBehavior: 0
+    - _MKEditorShowSpecularBehavior: 0
+    - _MKEditorShowTranslucentBehavior: 0
     - _Metallic: 0
     - _Mode: 0
     - _MotionAmount: 0
     - _OcclusionStrength: 1
+    - _OutlineSize: 0.02
     - _Parallax: 0.02
+    - _Rigidness: 25
+    - _RimIntensity: 0.5
+    - _RimSize: 1.5
+    - _RimSmoothness: 0.5
+    - _ShadowIntensity: 1
+    - _ShakeBending: 1
+    - _ShakeDisplacement: 1
+    - _ShakeTime: 1
+    - _ShakeWindspeed: 1
     - _Shininess: 0.7
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 0.5
+    - _Speed: 25
     - _SrcBlend: 1
+    - _SwayMax: 0.005
     - _UVSec: 0
+    - _YOffset: 0.5
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.09803921, g: 0.35686275, b: 0.20793572, a: 1}
     - _EmissionColor: {r: 20.078432, g: 626.4471, b: 766.9961, a: 0}
+    - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
     - _Illumi: {r: 0.48584908, g: 0.9775967, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintColor: {r: 0, g: 1, b: 0.27972865, a: 0.5}
