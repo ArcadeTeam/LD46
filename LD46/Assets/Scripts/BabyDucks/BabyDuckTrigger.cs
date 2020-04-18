@@ -21,7 +21,7 @@ public class BabyDuckTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<DuckController>().AddBaby(GetComponentInParent<BabyDuckController>());
+            other.gameObject.GetComponent<DuckController>().RemoveBaby(GetComponentInParent<BabyDuckController>());
         }
     }
 }
