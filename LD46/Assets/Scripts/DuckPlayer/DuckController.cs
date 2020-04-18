@@ -59,6 +59,7 @@ public class DuckController : Duck
     }
 
     void Update() {
+
         if (!dead)
         {
             //applying gravity
@@ -127,7 +128,16 @@ public class DuckController : Duck
                     baby.GoWithMom(transform);
                 }
             }
+
         }
+        else
+        {
+            lastSprintTime = -999f;
+            planning = false;
+            _body.AddForce(Physics.gravity * (_body.mass * _body.mass));
+        }
+
+
     }
 
     private bool isSprinting()
