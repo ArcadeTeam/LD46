@@ -31,26 +31,11 @@ public class BabyDuckController : Duck
         destination = newDestination;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (dead) return;
-
-        if (other.CompareTag("Human")) {
-            Vector3 dir = transform.position - other.transform.position;
-            agent.destination = other.transform.position + dir * 3;
-            destination = null;
-        }
-
-        if (other.CompareTag("Player")) {
-            other.gameObject.GetComponent<DuckController>().nearBabies.Add(this);
-        }
-    }
-
-    private void OnTriggerExit(Collider other) {
-        if (dead) return;
-
-        if (other.CompareTag("Player")) {
-            other.gameObject.GetComponent<DuckController>().nearBabies.Remove(this);
-        }
+    public void HumanDetected(Vector3 humanPosition)
+    {
+        Vector3 dir = transform.position - humanPosition;
+        agent.destination = humanPosition + dir * 3;
+        destination = null;
     }
 
     public void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f)

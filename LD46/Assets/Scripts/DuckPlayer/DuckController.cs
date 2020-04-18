@@ -22,7 +22,7 @@ public class DuckController : Duck
 
     private CameraFollower cameraFollower;
 
-    public List<BabyDuckController> nearBabies;
+    public HashSet<BabyDuckController> nearBabies;
 
     private Vector3 ori1;
     private Vector3 ori2;
@@ -34,6 +34,7 @@ public class DuckController : Duck
 
     void Start()
     {
+        nearBabies = new HashSet<BabyDuckController>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
         _body.useGravity = false;
         resetDuckAlignment();
@@ -179,5 +180,15 @@ public class DuckController : Duck
 
     }
 
+    public void AddBaby(BabyDuckController baby)
+    {
+        nearBabies.Add(baby);
+        Debug.Log(nearBabies.Count);
+    }
 
+    public void RemoveBaby(BabyDuckController baby)
+    {
+        nearBabies.Remove(baby);
+        Debug.Log(nearBabies.Count);
+    }
 }

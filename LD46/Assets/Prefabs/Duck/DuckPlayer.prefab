@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5419197964169617226}
   - component: {fileID: 5419197964169617231}
   - component: {fileID: 5419197964169617227}
-  - component: {fileID: 1870956922}
   m_Layer: 0
   m_Name: DuckPlayer
   m_TagString: Player
@@ -112,14 +111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235e13d520daa444183dc16624298b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 4
   JumpHeight: 4
-  DashForce: 5
-  timeBetweenDash: 3
+  SprintSpeed: 2
+  SprintTime: 1.5
+  timeBetweenSprint: 3
   Ground:
     serializedVersion: 2
     m_Bits: 0
-  nearBabies: []
 --- !u!136 &5419197964169617227
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -133,19 +132,6 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &1870956922
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5419197964169617269}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1059964303
 PrefabInstance:
