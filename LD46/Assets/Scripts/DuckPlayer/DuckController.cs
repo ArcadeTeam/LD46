@@ -6,6 +6,10 @@ public class DuckController : MonoBehaviour
 {
     public float Speed = 1f;
     public float JumpHeight = 2f;
+
+    public float DashForce = 5f;
+    public float timeBetweenDash = 3f;
+
     public LayerMask Ground;
 
     private Rigidbody _body;
@@ -18,6 +22,7 @@ public class DuckController : MonoBehaviour
     private CameraFollower cameraFollower;
 
     public List<BabyDuckController> nearBabies;
+    private float lastDash = -999f;
 
 
     void Start()
@@ -25,22 +30,9 @@ public class DuckController : MonoBehaviour
         _body = GetComponent<Rigidbody>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
         resetDuckAlignment();
-        //StartCoroutine(waiter());
     }
 
-    /*
-    IEnumerator waiter()
-    {
-
-        //Wait for 4 seconds
-        yield return new WaitForSeconds(4);
-        killDuck(new Vector3(-1f,1f,0f), 20f);
-        yield return new WaitForSeconds(4);
-        resetDuck(new Vector3(66.03f, 2.33f, 129.67f));
-    }*/
-
-
-    void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f )
+    public void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f )
     {
         dead = true;
         GetComponent<Rigidbody>().freezeRotation = false;
@@ -48,7 +40,7 @@ public class DuckController : MonoBehaviour
         _body.AddTorque(new Vector3(0f,10f, 10f));
     }
 
-    void resetDuck(Vector3 position)
+    public void resetDuck(Vector3 position)
     {
         dead = false;
         GetComponent<Rigidbody>().freezeRotation = true;
@@ -93,10 +85,15 @@ public class DuckController : MonoBehaviour
             }
 
             if (Input.GetButtonDown("Fire1")) {
-
+                Debug.Log(Time.fixedTime - lastDash);
+                if (Time.fixedTime - lastDash >= timeBetweenDash)
+                {
+                    lastDash = Time.fixedTime;
+                    _body.AddForce(transform.forward.normalized * DashForce, ForceMode.Impulse);
+                }
             }
             if (Input.GetButtonDown("Fire2")) {
-                foreach(BabyDuckController baby in nearBabies) {
+                foreach (BabyDuckController baby in nearBabies) {
                     baby.GoWithMom(transform);
                 }
             }
