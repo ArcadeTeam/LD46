@@ -23,10 +23,10 @@ public class DuckController : MonoBehaviour
         _body = GetComponent<Rigidbody>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
         resetDuckAlignment();
-        StartCoroutine(waiter());
+        //StartCoroutine(waiter());
     }
 
-
+    /*
     IEnumerator waiter()
     {
 
@@ -35,7 +35,7 @@ public class DuckController : MonoBehaviour
         killDuck(new Vector3(-1f,1f,0f), 20f);
         yield return new WaitForSeconds(4);
         resetDuck(new Vector3(66.03f, 2.33f, 129.67f));
-    }
+    }*/
 
 
     void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f )
