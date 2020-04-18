@@ -174,6 +174,7 @@ public class DuckController : Duck
         else
         {
             if (_body.velocity.y == 0) _body.velocity = new Vector3(_body.velocity.x * 0.9f, 0f, _body.velocity.z * 0.9f);
+            if (_body.velocity.magnitude < 1f) _body.angularVelocity = Vector3.zero;
         }
 
     }
