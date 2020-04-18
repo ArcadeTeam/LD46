@@ -20,18 +20,12 @@ public class CameraFollower : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.forward = cameraPositionRelative;
         var distance = cameraPositionRelative.magnitude * cameraDistance;
         Vector3 desiredCameraLocation = duckObject.transform.position - cameraPositionRelative* distance;
         Vector3 difference = (transform.position - desiredCameraLocation);
-        filteredPositions.Add(difference);
-        if (filteredPositions.Count>4) filteredPositions.RemoveAt(0);
-        Vector3 average = Vector3.zero;
-
         transform.position -= difference * cameraSpeed;
-
-        
     }
 }
