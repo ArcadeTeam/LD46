@@ -9,7 +9,6 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] float fadeTime = 2f;
     public Image fadePanel;
-    public GameObject m_panelAnyKey;
     public GameObject m_panelMenu;
 
     public Scrollbar masterSlider;
@@ -83,7 +82,6 @@ public class MainMenuManager : MonoBehaviour
             fadePanel.color = new Color(0f, 0f, 0f, t / (fadeTime));
             yield return null;
         }
-        m_panelAnyKey.gameObject.SetActive(true);
     }
     IEnumerator UnFading()
     {
