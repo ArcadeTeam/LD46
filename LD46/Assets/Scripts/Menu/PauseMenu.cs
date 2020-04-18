@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     public string menuSceneName = "MainMenu";
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetButtonDown("Start")) {
             if (paused) {
                 Resume();
             } else {
