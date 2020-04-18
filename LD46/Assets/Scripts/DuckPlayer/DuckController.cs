@@ -14,40 +14,83 @@ public class DuckController : MonoBehaviour
     private Vector3 groundOrientation = Vector3.up;
     private Vector3 orientatedInput;
 
+    private bool dead = false;
+    private CameraFollower cameraFollower;
+
+
     void Start()
     {
         _body = GetComponent<Rigidbody>();
-
+        cameraFollower = Camera.main.GetComponent<CameraFollower>();
+        resetDuckAlignment();
+        StartCoroutine(waiter());
     }
 
 
+    IEnumerator waiter()
+    {
+
+        //Wait for 4 seconds
+        yield return new WaitForSeconds(4);
+        killDuck(new Vector3(-1f,1f,0f), 20f);
+        yield return new WaitForSeconds(4);
+        resetDuck(new Vector3(66.03f, 2.33f, 129.67f));
+    }
+
+
+    void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f )
+    {
+        dead = true;
+        GetComponent<Rigidbody>().freezeRotation = false;
+        _body.velocity = impactOrientation.normalized * impactSpeed;
+        _body.AddTorque(new Vector3(0f,10f, 10f));
+    }
+
+    void resetDuck(Vector3 position)
+    {
+        dead = false;
+        GetComponent<Rigidbody>().freezeRotation = true;
+        transform.position = position;
+        resetDuckAlignment();
+        cameraFollower.fastMoveToDuck();
+
+    }
+
+    private void resetDuckAlignment()
+    {
+        var cameraPos = cameraFollower.cameraPositionRelative;
+        var camPos2 = new Vector3(cameraPos.x, 0, cameraPos.z);
+        transform.forward = camPos2;
+    }
 
     void Update() {
 
-        checkOnFloor();
-        
-        _inputs = Vector3.zero;
-        _inputs.x = Input.GetAxis("Horizontal");
-        _inputs.z = Input.GetAxis("Vertical");
-        if (_inputs != Vector3.zero)
+
+
+        if (!dead)
         {
-            
-            var cameraPos = Camera.main.GetComponent<CameraFollower>().cameraPositionRelative;
+            checkOnFloor();
 
-            var camPos2 = new Vector3(cameraPos.x,0,cameraPos.z);
-            transform.forward = camPos2;
-            orientatedInput = transform.localRotation * _inputs;
-            transform.forward = orientatedInput;
+            _inputs = Vector3.zero;
+            _inputs.x = Input.GetAxis("Horizontal");
+            _inputs.z = Input.GetAxis("Vertical");
+            if (_inputs != Vector3.zero)
+            {
+                var cameraPos = cameraFollower.cameraPositionRelative;
+                var camPos2 = new Vector3(cameraPos.x, 0, cameraPos.z);
+                transform.forward = camPos2;
+                orientatedInput = transform.localRotation * _inputs;
+                transform.forward = orientatedInput;
 
+            }
+            else orientatedInput = Vector3.zero;
 
-
+            if (Input.GetButtonDown("Jump") && _isGrounded)
+            {
+                _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            }
         }
-        else orientatedInput = Vector3.zero;
 
-        if (Input.GetButtonDown("Jump") && _isGrounded)
-        {
-            _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
-        }
     }
 
     private void checkOnFloor() 
@@ -67,6 +110,14 @@ public class DuckController : MonoBehaviour
 
     void FixedUpdate()
     {
-        _body.MovePosition(_body.position + orientatedInput * Speed * Time.fixedDeltaTime);
+        if (!dead)
+        {
+            _body.MovePosition(_body.position + orientatedInput * Speed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            if (_body.velocity.y == 0) _body.velocity = new Vector3(_body.velocity.x * 0.9f, 0f, _body.velocity.z * 0.9f);
+        }
+
     }
 }

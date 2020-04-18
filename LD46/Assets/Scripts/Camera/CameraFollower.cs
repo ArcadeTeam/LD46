@@ -19,6 +19,17 @@ public class CameraFollower : MonoBehaviour
         duckObject = FindObjectOfType<DuckController>().gameObject;
     }
 
+
+
+    public void fastMoveToDuck()
+    {
+        transform.forward = cameraPositionRelative;
+        var distance = cameraPositionRelative.magnitude * cameraDistance;
+        Vector3 desiredCameraLocation = duckObject.transform.position - cameraPositionRelative * distance;
+        Vector3 difference = (transform.position - desiredCameraLocation);
+        transform.position -= difference;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
