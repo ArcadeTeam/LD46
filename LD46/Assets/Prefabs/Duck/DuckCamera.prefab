@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8adfd808f6d624dacd4c115c0def5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDistance: 2
+  cameraDistance: 6
   cameraSpeed: 0.1
   cameraPositionRelative: {x: -1, y: -0.75, z: 1}

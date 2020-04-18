@@ -40,11 +40,9 @@ public class DuckController : MonoBehaviour
             transform.forward = orientatedInput;
 
 
-
-          //  transform.forward = _inputs;
         } else orientatedInput = Vector3.zero;
 
-        if (Input.GetButtonDown("Jump")/* && _isGrounded*/)
+        if (Input.GetButtonDown("Jump") && _isGrounded)
         {
             _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }
