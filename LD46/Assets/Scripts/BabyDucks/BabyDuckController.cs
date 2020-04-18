@@ -7,14 +7,15 @@ public class BabyDuckController : MonoBehaviour
 {
     public Transform destination;
     NavMeshAgent agent;
-    public int distractionProbability = 0;
+    int distractionProbability = 0;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update() {
-        agent.destination = destination.position;
+        if(destination != null)
+            agent.destination = destination.position;
     }
 
     public void Distract(Transform newDestination) {
@@ -27,5 +28,18 @@ public class BabyDuckController : MonoBehaviour
     public void GoWithMom(Transform newDestination) {
         distractionProbability = 0;
         destination = newDestination;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Human")) {
+            Vector3 dir = transform.position - other.transform.position;
+            agent.destination = other.transform.position + dir * 3;
+            destination = null;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        //if (other.CompareTag("Human"))
+            
     }
 }
