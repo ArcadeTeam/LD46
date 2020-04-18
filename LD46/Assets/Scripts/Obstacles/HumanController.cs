@@ -32,7 +32,7 @@ public class HumanController : MonoBehaviour
             var nextPosition = GetRandomPoint();
             if (nextPosition.x != Mathf.Infinity)
             {
-                Debug.Log(nextPosition);
+                //Debug.Log(nextPosition);
                 agent.destination = nextPosition;
             }
         }
