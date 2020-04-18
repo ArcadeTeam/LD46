@@ -22,8 +22,6 @@ public class MainMenuManager : MonoBehaviour
 
     public SplineController splineController;
 
-    private bool waitAnyKey = true;
-
     float counter = 72f;
 
     GameManager gameManager;
@@ -70,16 +68,6 @@ public class MainMenuManager : MonoBehaviour
         {
             counter = 0;
             splineController.FollowSpline();
-        }
-
-        if (waitAnyKey)
-        {
-            if (Input.anyKey/* || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Exit")*/)
-            {
-                waitAnyKey = false;
-                m_panelAnyKey.SetActive(false);
-                m_panelMenu.SetActive(true);
-            }
         }
     }
 
