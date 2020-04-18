@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DuckController : MonoBehaviour
+public class DuckController : Duck
 {
     public float Speed = 1f;
     public float JumpHeight = 4f;
@@ -12,14 +12,12 @@ public class DuckController : MonoBehaviour
     public float timeBetweenDash = 3f;
 
     public LayerMask Ground;
-
-    private Rigidbody _body;
+    
     private Vector3 _inputs = Vector3.zero;
     private bool _isGrounded = true;
     private Vector3 groundOrientation = Vector3.up;
     private Vector3 orientatedInput;
 
-    private bool dead = false;
     private CameraFollower cameraFollower;
 
     public List<BabyDuckController> nearBabies;
@@ -35,18 +33,9 @@ public class DuckController : MonoBehaviour
 
     void Start()
     {
-        _body = GetComponent<Rigidbody>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
         _body.useGravity = false;
         resetDuckAlignment();
-    }
-
-    public void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f )
-    {
-        dead = true;
-        GetComponent<Rigidbody>().freezeRotation = false;
-        _body.velocity = impactOrientation.normalized * impactSpeed;
-        _body.AddTorque(new Vector3(0f,10f, 10f));
     }
 
     public void resetDuck(Vector3 position)
@@ -69,8 +58,6 @@ public class DuckController : MonoBehaviour
     }
 
     void Update() {
-
-
         if (!dead)
         {
             //applying gravity
