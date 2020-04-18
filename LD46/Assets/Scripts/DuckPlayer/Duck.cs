@@ -13,6 +13,9 @@ public class Duck : MonoBehaviour
 
     public void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f)
     {
+        if (gameObject.CompareTag("Player") && !dead) {
+            GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
+        }
         dead = true;
         GetComponent<Rigidbody>().freezeRotation = false;
         _body.velocity = impactOrientation.normalized * impactSpeed;
