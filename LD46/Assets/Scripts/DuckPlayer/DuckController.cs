@@ -6,7 +6,7 @@ using UnityEngine;
 public class DuckController : MonoBehaviour
 {
     public float Speed = 1f;
-    public float JumpHeight = 2f;
+    public float JumpHeight = 4f;
 
     public float DashForce = 5f;
     public float timeBetweenDash = 3f;
@@ -25,15 +25,19 @@ public class DuckController : MonoBehaviour
     public List<BabyDuckController> nearBabies;
     private float lastDash = -999f;
 
-
     private Vector3 ori1;
     private Vector3 ori2;
     private float oriTime2;
+
+    private Vector3 lastOrientationWhenGrounded = Vector3.forward;
+
+    private Boolean planning = false;
 
     void Start()
     {
         _body = GetComponent<Rigidbody>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
+        _body.useGravity = false;
         resetDuckAlignment();
     }
 
@@ -69,34 +73,59 @@ public class DuckController : MonoBehaviour
 
         if (!dead)
         {
+            //applying gravity
+            if (planning)
+            {
+                if (_body.velocity.y > -0.1f) _body.AddForce(0.2f * Physics.gravity * (_body.mass * _body.mass));
+            }
+            else
+            {
+                _body.AddForce(Physics.gravity * (_body.mass * _body.mass));
+            }
+
             checkOnFloor();
 
+            //orientation
             _inputs = Vector3.zero;
             _inputs.x = Input.GetAxis("Horizontal");
             _inputs.z = Input.GetAxis("Vertical");
-            if (_inputs != Vector3.zero)
+            if (_inputs != Vector3.zero )
             {
                 var cameraPos = cameraFollower.cameraPositionRelative;
                 var camPos2 = new Vector3(cameraPos.x, 0, cameraPos.z);
                 transform.forward = camPos2;
                 orientatedInput = transform.localRotation * _inputs;
 
-                if ((Time.fixedTime - oriTime2) * 7 > 1)
+                if ((Time.fixedTime - oriTime2) * 10 > 1)
                 {
                     ori1 = ori2;
                     ori2 = orientatedInput;
                     oriTime2 = Time.fixedTime;
                 }
 
-                transform.forward = Vector3.Slerp(ori1, ori2, (Time.fixedTime- oriTime2) *7);
+                transform.forward = Vector3.Slerp(ori1, ori2, (Time.fixedTime- oriTime2) *10);
             }
             else orientatedInput = Vector3.zero;
 
+            if (_isGrounded) lastOrientationWhenGrounded = orientatedInput;
+
+            //planning detection
+            if (Input.GetButton("Jump") && _body.velocity.y <= 0)
+            {
+                planning = true;
+            }
+            else
+            {
+                planning = false;
+            }
+
+            //jump detection
             if (Input.GetButtonDown("Jump") && _isGrounded)
             {
                 _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
             }
 
+            //dash logic
             if (Input.GetButtonDown("Fire1")) {
                 if (Time.fixedTime - lastDash >= timeBetweenDash)
                 {
@@ -104,6 +133,8 @@ public class DuckController : MonoBehaviour
                     _body.AddForce(transform.forward.normalized * DashForce, ForceMode.Impulse);
                 }
             }
+
+            //quack logic
             if (Input.GetButtonDown("Fire2")) {
                 foreach (BabyDuckController baby in nearBabies) {
                     baby.GoWithMom(transform);
@@ -131,7 +162,9 @@ public class DuckController : MonoBehaviour
     {
         if (!dead)
         {
-            _body.MovePosition(_body.position + orientatedInput * Speed * Time.fixedDeltaTime);
+            var orientation = orientatedInput;
+            if (!_isGrounded) orientation = Vector3.Lerp(orientation, lastOrientationWhenGrounded, 0.25f);
+            _body.MovePosition(_body.position + orientation * Speed * Time.fixedDeltaTime);
         }
         else
         {
