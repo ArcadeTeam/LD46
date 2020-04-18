@@ -1521,11 +1521,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5419197964169617226, guid: 669527c5a70af944eb70677ba0058353,
+    - target: {fileID: 5419197964169617227, guid: 669527c5a70af944eb70677ba0058353,
         type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 531cee102b1b1d6409ffacc6d22a3fdb,
+        type: 2}
     - target: {fileID: 5419197964169617230, guid: 669527c5a70af944eb70677ba0058353,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5548,6 +5549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246478100213915347, guid: 76707f9766a751142ab493b2e3115baa,
+        type: 3}
+      propertyPath: cameraDistance
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3246478100213915351, guid: 76707f9766a751142ab493b2e3115baa,
         type: 3}
