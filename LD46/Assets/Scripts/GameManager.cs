@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        duckWinCount = spawner.childCount;
+        duckWinCount = 3;//spawner.childCount;
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         if (!win && babyCount >= duckWinCount)
         {
             win = true;
-            Debug.Log("WIN!!");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
