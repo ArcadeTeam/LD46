@@ -20,9 +20,9 @@ public class HumanController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.destination = GetRandomPoint();
 
-        walkRadius = Random.Range(10f, 50f);
+        walkRadius = Random.Range(10f, 30f);
         lastPosition = transform.position;
-        InvokeRepeating("ChangePath", changePathTimeout, Random.Range(3f, changePathTimeout));
+        InvokeRepeating("ChangePath", 0f, Random.Range(3f, changePathTimeout));
     }
 
     private void ChangePath()
