@@ -8,8 +8,6 @@ public class Duck : MonoBehaviour
     protected bool dead = false;
 
     public ParticleSystem splash;
-    private bool canSplah = true;
-    private float waterSplashCooldown = 1f;
 
     void Awake()
     {
@@ -32,16 +30,5 @@ public class Duck : MonoBehaviour
     public void WaterSplash()
     {
         splash.Play();
-        /*if (canSplah)
-        {
-            canSplah = false;
-            splash.Play();
-            Invoke("WaterSplashCooldown", waterSplashCooldown);
-        }*/
-    }
-
-    private void WaterSplashCooldown()
-    {
-        canSplah = true;
     }
 }
