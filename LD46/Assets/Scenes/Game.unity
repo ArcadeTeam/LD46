@@ -13620,6 +13620,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1224604413, guid: 669527c5a70af944eb70677ba0058353, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5419197964169617230, guid: 669527c5a70af944eb70677ba0058353,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13679,6 +13683,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DuckPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834743905854538952, guid: 669527c5a70af944eb70677ba0058353,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 669527c5a70af944eb70677ba0058353, type: 3}
