@@ -130,10 +130,11 @@ public class DuckController : Duck
 
 
             //honk logic
-
+            animator.SetBool("Honking", false);
             if (Input.GetButtonDown("Fire2"))
             {
                 honkStart = Time.realtimeSinceStartup;
+                animator.SetBool("Honking", true);
             }
 
             if (Input.GetButton("Fire2"))
