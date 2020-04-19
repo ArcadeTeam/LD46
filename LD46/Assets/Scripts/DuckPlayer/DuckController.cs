@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class DuckController : Duck
 {
-    public float Speed = 1f;
-    public float JumpHeight = 4f;
+    private float Speed = 6f;
+    private float JumpHeight = 4f;
 
-    public float SprintSpeed = 2f;
-    public float SprintTime = 1.5f;
-    public float timeBetweenSprint = 3f;
-    private float lastSprintTime = -999f;
+    private float SprintSpeed;
+    private float rotationSpeed = 4f;
 
     public LayerMask Ground;
     
@@ -25,16 +23,15 @@ public class DuckController : Duck
 
     public HashSet<BabyDuckController> nearBabies;
 
-    private Vector3 ori1;
-    private Vector3 ori2;
-    private float oriTime2;
-
     private Vector3 lastOrientationWhenGrounded = Vector3.forward;
 
     private Boolean planning = false;
 
+    private bool isSprinting = false;
     void Start()
     {
+        SprintSpeed = Speed * 2f;
+
         nearBabies = new HashSet<BabyDuckController>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
         _body.useGravity = false;
@@ -48,9 +45,6 @@ public class DuckController : Duck
         transform.position = position;
         resetDuckAlignment();
         cameraFollower.fastMoveToDuck();
-        ori1 = position;
-        ori2 = position;
-        oriTime2 = 0;
     }
 
     private void resetDuckAlignment()
@@ -86,19 +80,9 @@ public class DuckController : Duck
             _inputs.z = Input.GetAxis("Vertical");
             if (_inputs != Vector3.zero )
             {
-                var cameraPos = cameraFollower.cameraPositionRelative;
-                var camPos2 = new Vector3(cameraPos.x, 0, cameraPos.z);
-                transform.forward = camPos2;
-                orientatedInput = transform.localRotation * _inputs;
-
-                if ((Time.fixedTime - oriTime2) * 10 > 1)
-                {
-                    ori1 = ori2;
-                    ori2 = orientatedInput;
-                    oriTime2 = Time.fixedTime;
-                }
-
-                transform.forward = Vector3.Slerp(ori1, ori2, (Time.fixedTime- oriTime2) *10);
+                Quaternion lookOnLook = Quaternion.LookRotation(-_inputs);
+                transform.rotation =  Quaternion.Slerp(transform.rotation, lookOnLook, Time.deltaTime * rotationSpeed);
+                orientatedInput = transform.forward;
             }
             else orientatedInput = Vector3.zero;
 
@@ -122,10 +106,12 @@ public class DuckController : Duck
 
             //dash logic
             if (Input.GetButtonDown("Fire1") && _isGrounded) {
-                if (Time.fixedTime - lastSprintTime >= timeBetweenSprint)
-                {
-                    lastSprintTime = Time.fixedTime;
-                }
+                isSprinting = true;
+                rotationSpeed = 2f;
+            } else if (!_isGrounded || Input.GetButtonUp("Fire1"))
+            {
+                isSprinting = false;
+                rotationSpeed = 4f;
             }
 
             //quack logic
@@ -139,7 +125,6 @@ public class DuckController : Duck
         }
         else
         {
-            lastSprintTime = -999f;
             planning = false;
             _body.AddForce(Physics.gravity * (_body.mass * _body.mass));
         }
@@ -156,11 +141,6 @@ public class DuckController : Duck
 
 
         return humans;
-    }
-
-    private bool isSprinting()
-    {
-        return (Time.fixedTime - lastSprintTime < SprintTime);
     }
 
     private void checkOnFloor() 
@@ -183,7 +163,7 @@ public class DuckController : Duck
         if (!dead)
         {
             var speed = Speed;
-            if (isSprinting()) speed = SprintSpeed;
+            if (isSprinting) speed = SprintSpeed;
 
             var orientation = orientatedInput;
             if (!_isGrounded) orientation = Vector3.Lerp(orientation, lastOrientationWhenGrounded, 0.25f);
