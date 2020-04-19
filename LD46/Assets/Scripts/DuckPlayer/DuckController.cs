@@ -133,13 +133,13 @@ public class DuckController : Duck
             if (Input.GetButtonDown("Fire2"))
             {
                 honkStart = Time.realtimeSinceStartup;
-                honk.SetActive(true);
             }
 
             if (Input.GetButton("Fire2"))
             {
                 if (Time.realtimeSinceStartup - honkStart > 0.25f)
                 {
+                    honk.SetActive(true);
                     if (!audio.isPlaying)
                     {
                         audio.loop = true;
@@ -156,6 +156,7 @@ public class DuckController : Duck
             {
                 if (Time.realtimeSinceStartup - honkStart <= 0.25f)
                 {
+                    honk.SetActive(true);
                     audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/babiesHonk"));
                     StartCoroutine(disableHonk(0.5f));
                     foreach (BabyDuckController baby in nearBabies)
