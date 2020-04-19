@@ -15,7 +15,7 @@ NavMeshProjectSettings:
     cost: 1
   - name: Road
     cost: 1
-  - name: 
+  - name: Water
     cost: 1
   - name: 
     cost: 1
