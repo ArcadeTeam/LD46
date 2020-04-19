@@ -11131,6 +11131,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PapaDuck_Anim
       objectReference: {fileID: 0}
+    - target: {fileID: 7214686603006540533, guid: 35281949e1b74644c8f3370ea0f5f76d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35281949e1b74644c8f3370ea0f5f76d, type: 3}
 --- !u!1 &849937390488790435 stripped

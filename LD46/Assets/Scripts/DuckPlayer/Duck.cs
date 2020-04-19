@@ -9,6 +9,7 @@ public class Duck : MonoBehaviour
 
     public ParticleSystem splash;
 
+
     void Awake()
     {
         splash.Stop();
@@ -18,7 +19,7 @@ public class Duck : MonoBehaviour
     public void killDuck(Vector3 impactOrientation, float impactSpeed = 1.0f)
     {
         if (gameObject.CompareTag("Player") && !dead) {
-           // gameObject.transform.FindChild("")
+            gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
             GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
         }
         dead = true;
