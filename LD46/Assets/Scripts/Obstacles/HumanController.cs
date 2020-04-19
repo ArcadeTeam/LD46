@@ -100,7 +100,7 @@ public class HumanController : MonoBehaviour
         }
 
         //pass from scared to running
-        if (currentState == CharState.Scared && timeInThisState() > 3f)
+        if (currentState == CharState.Scared && timeInThisState() > 2f)
         {
             var nextPosition = transform.position + (transform.position - duckPosition).normalized * 500f;
             agent.destination = nextPosition;
@@ -115,7 +115,6 @@ public class HumanController : MonoBehaviour
             setState(CharState.Walking);
             ChangePath();
         }
-
     }
 
 

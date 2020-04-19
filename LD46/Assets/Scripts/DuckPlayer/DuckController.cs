@@ -149,7 +149,7 @@ public class DuckController : Duck
 
     private List<HumanController> getCloseHumans()
     {
-        List<HumanController> humans = Physics.OverlapSphere(transform.position, 4f)
+        List<HumanController> humans = Physics.OverlapSphere(transform.position, 6f)
             .Select(hit => hit.transform.gameObject.GetComponent<HumanController>())
             .Where(hc => hc != null && hc != this)
             .ToList();
