@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BabyDuck
   - Human
+  - Fire
+  - Ball
   layers:
   - Default
   - TransparentFX
