@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class CarController : MonoBehaviour
 {
-    private float distanceThreshold = 5f;
+    private float distanceThreshold = 10f;
     public Transform waypoints;
     private List<Transform> positions;
 
@@ -57,7 +57,6 @@ public class CarController : MonoBehaviour
 
     private void CheckPatrolNextPosition()
     {
-        //Debug.Log((Vector3.Distance(transform.position, currentTarget.position) < distanceThreshold));
         if (Vector3.Distance(transform.position, currentTarget.position) < distanceThreshold)
         {
             UpdateCurrentPosition();
@@ -81,17 +80,6 @@ public class CarController : MonoBehaviour
             nextPosition = 0;
 
         return nextPosition;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("BabyDuck"))
-        {
-            var direction = -collision.impulse.normalized;
-            var impact = new Vector3(direction.x, 0.2f, direction.z);
-
-            collision.gameObject.GetComponent<Duck>().killDuck(impact, 30f);
-        }
     }
 
 }

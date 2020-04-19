@@ -21,4 +21,18 @@ public class Duck : MonoBehaviour
         _body.velocity = impactOrientation.normalized * impactSpeed;
         _body.AddTorque(new Vector3(0f, 10f, 10f));
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (dead) return;
+
+    //    Debug.Log(collision.relativeVelocity);
+    //    if (collision.relativeVelocity.y > 15)
+    //    {
+    //        var direction = -collision.impulse.normalized;
+    //        var impact = new Vector3(direction.x, 0.2f, direction.z);
+
+    //        killDuck(impact, 30f);
+    //    }
+    //}
 }
