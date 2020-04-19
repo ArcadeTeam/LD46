@@ -15,9 +15,7 @@ public class PorteriaFireworks : MonoBehaviour
         if (enter && exit)
         {
             Debug.Log("GOOOOOOOOOOOOOOOOOOOOOOOOOOOL");
-            var obj = Instantiate(fireworks, fireworkSpawner);
-            Destroy(obj, 5f);
+            Instantiate(fireworks, fireworkSpawner);
         }
-            
     }
 }
