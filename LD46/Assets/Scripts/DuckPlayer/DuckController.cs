@@ -10,7 +10,8 @@ public class DuckController : Duck
     private float JumpHeight = 4f;
 
     private float SprintSpeed;
-    private float rotationSpeed = 4f;
+    
+    [SerializeField]float rotationSpeed = 4f;
 
     public LayerMask Ground;
     
@@ -37,6 +38,8 @@ public class DuckController : Duck
 
     private AudioSource audio;
     private Animator animator;
+
+    bool walking = false;
 
     void Start()
     {
@@ -91,13 +94,15 @@ public class DuckController : Duck
             _inputs = Vector3.zero;
             _inputs.x = Input.GetAxis("Horizontal");
             _inputs.z = Input.GetAxis("Vertical");
-            if (_inputs != Vector3.zero )
-            {
+            if (_inputs != Vector3.zero) {
+                walking = true;
                 Quaternion lookOnLook = Quaternion.LookRotation(-_inputs);
-                transform.rotation =  Quaternion.Slerp(transform.rotation, lookOnLook, Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, Time.deltaTime * rotationSpeed);
                 orientatedInput = transform.forward;
+            } else {
+                walking = false;
+                orientatedInput = Vector3.zero;
             }
-            else orientatedInput = Vector3.zero;
 
             if (_isGrounded) lastOrientationWhenGrounded = orientatedInput;
 
@@ -232,7 +237,7 @@ public class DuckController : Duck
 
             Debug.Log(_body.velocity.magnitude);
 
-            animator.SetBool("Idle", _body.velocity.magnitude == 0f);
+            animator.SetBool("Idle", _body.velocity.magnitude < 0.000000000001f);
             animator.SetBool("Planning", !_isGrounded);
             animator.SetBool("Sprinting", isSprinting);
 
