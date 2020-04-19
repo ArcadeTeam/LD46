@@ -28,6 +28,10 @@ public class DuckController : Duck
     private Boolean planning = false;
 
     private bool isSprinting = false;
+
+    public GameObject featherParticleEffect;
+    private bool particleActivate = false;
+
     void Start()
     {
         SprintSpeed = Speed * 2f;
@@ -125,6 +129,12 @@ public class DuckController : Duck
         }
         else
         {
+            if (!particleActivate)
+            {
+                particleActivate = true;
+                featherParticleEffect.SetActive(true);
+            }
+
             planning = false;
             _body.AddForce(Physics.gravity * (_body.mass * _body.mass));
         }
