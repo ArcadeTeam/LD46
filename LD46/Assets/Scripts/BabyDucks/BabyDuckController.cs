@@ -10,8 +10,14 @@ public class BabyDuckController : Duck
     int distractionProbability = 0;
     [SerializeField] Animator animator;
 
+    [Header("Skins")]
+    public Material[] skins;
+    private SkinnedMeshRenderer skinnedMesh;
+
     void Start() {
         agent = GetComponent<NavMeshAgent>();
+        skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
+        skinnedMesh.material = skins[Random.Range(0, skins.Length)];
     }
 
     void Update() {

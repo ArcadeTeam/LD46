@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878984115125796247}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.8, y: 0, z: -27.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -86,6 +86,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
   animator: {fileID: 1742894812159161599}
+  skinnedMesh: {fileID: 4344788380947231142}
+  skins:
+  - {fileID: 2100000, guid: 7c6d51b6c5f9ae94382f0f0126e2bc31, type: 2}
+  - {fileID: 2100000, guid: 067cb7af0e6cada4080434747542c7e5, type: 2}
+  - {fileID: 2100000, guid: 1e19d6f22817e2a40b16b9f41a99a298, type: 2}
+  - {fileID: 2100000, guid: 2af44647d5ef9814694b9b50f820f3e5, type: 2}
 --- !u!54 &2923521251064845779
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -242,6 +248,12 @@ Transform:
 --- !u!95 &1742894812159161599 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 60949533a90e82b4cb0737b49ba0f723,
+    type: 3}
+  m_PrefabInstance: {fileID: 3729181254341571231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4344788380947231142 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1120125909685863225, guid: 60949533a90e82b4cb0737b49ba0f723,
     type: 3}
   m_PrefabInstance: {fileID: 3729181254341571231}
   m_PrefabAsset: {fileID: 0}

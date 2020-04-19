@@ -162,6 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
   animator: {fileID: 7548845959382666629}
+  skins:
+  - {fileID: 2100000, guid: cf7bdf9a0870615459225a99415267af, type: 2}
 --- !u!54 &2772986854720554442
 Rigidbody:
   m_ObjectHideFlags: 0
