@@ -14,5 +14,11 @@ public class CollisionDamage : MonoBehaviour
 
             collision.gameObject.GetComponent<Duck>().killDuck(impact, 30f);
         }
+
+        if (collision.gameObject.CompareTag("Human")) {
+            HumanController human = collision.gameObject.GetComponent<HumanController>();
+            if (human != null)
+                human.Die();
+        }
     }
 }
