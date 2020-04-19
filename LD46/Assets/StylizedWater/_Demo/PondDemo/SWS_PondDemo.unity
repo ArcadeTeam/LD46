@@ -16130,8 +16130,8 @@ MonoBehaviour:
   shaderNames:
   - Desktop
   - Mobile
-  shaderIndex: 0
-  shader: {fileID: 4800000, guid: 4bcc0b68579a5c740ad31644411ffb54, type: 3}
+  shaderIndex: 1
+  shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 1
   isUnlit: 0
@@ -16166,13 +16166,13 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   waterShallowColor: {r: 0, g: 0.91724133, b: 1, a: 0.609}
-  depth: 5.2
+  depth: 3.8
   waterColor: {r: 0, g: 0.6275863, b: 1, a: 0}
   fresnelColor: {r: 0.29411763, g: 0.64949304, b: 1, a: 0}
   fresnel: 1.38
   rimColor: {r: 1, g: 1, b: 1, a: 0.134}
-  waveTint: -0.085
-  transparency: 0.443
+  waveTint: -0.171
+  transparency: 0.884
   glossiness: 0.96
   metallicness: 0
   edgeFade: 0.84
@@ -16182,34 +16182,34 @@ MonoBehaviour:
   worldSpaceTiling: 1
   refractionAmount: 0.0437
   enableNormalMap: 1
-  normalStrength: 0.368
-  enableMacroNormals: 0
+  normalStrength: 0.031
+  enableMacroNormals: 1
   macroNormalsDistance: 250
-  normalTiling: 0.9
+  normalTiling: 0.28
   intersectionSolver: 0
   intersectionSolverNames:
   - Depth-based
   - Vertex color (red)
-  rimSize: 2
-  rimFalloff: 8.2
-  rimTiling: 0.3299995
+  rimSize: 1.9
+  rimFalloff: 20.3
+  rimTiling: 0.15999952
   rimDistortion: 0.041
   enableVCIntersection: 0
   foamSolver: 0
   foamSolverNames:
   - Normal map
   - Intersection texture
-  foamOpacity: 0.03
+  foamOpacity: -0.056
   foamTiling: 0.20000008
   foamSize: 0
   foamDistortion: 0.06
-  foamSpeed: 0
+  foamSpeed: 0.12
   waveFoam: 0
   reflectionStrength: 1
   reflectionFresnel: 3.53
   showReflection: 0
   reflectionRefraction: 0.015
-  waveSpeed: 1.26
+  waveSpeed: 1.93
   waveStrength: 0.104
   waveDirectionXZ: {x: 0.01, y: 0, z: 0.69, w: 0}
   enableSecondaryWaves: 0
@@ -16245,7 +16245,7 @@ MonoBehaviour:
   - Chaotic
   - Custom...
   waveHeightmapStyle: 0
-  waveSize: 0.9899999
+  waveSize: 0.61
   useCustomIntersection: 0
   useCustomNormals: 0
   useCustomHeightmap: 0
@@ -16253,7 +16253,7 @@ MonoBehaviour:
   shadermap: {fileID: 2800000, guid: ed94ba38312aebc42be9f8e30aede540, type: 3}
   colorGradientTex: {fileID: 0}
   useCompression: 0
-  useReflection: 1
+  useReflection: 0
   useRefractionCam: 0
   enableReflectionBlur: 0
   reflectionBlurLength: 15
@@ -16286,9 +16286,9 @@ MonoBehaviour:
   shadowCaster: {fileID: 1628943269}
   currentCam: {fileID: 0}
   material: {fileID: 2100000, guid: 0fcecf10c96339c4c94f67f48251a393, type: 2}
-  isMobileAdvanced: 0
+  isMobileAdvanced: 1
   isMobilePlatform: 0
-  shaderName: StylizedWater/Desktop
+  shaderName: StylizedWater/Mobile
   isWaterLayer: 0
   hasShaderParams: 1
   hasMaterial: 1
@@ -16352,7 +16352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971025721}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 117.2, y: 2.9, z: 110}
+  m_LocalPosition: {x: 117.2, y: 4.3, z: 110}
   m_LocalScale: {x: 0.19724824, y: 0.19724828, z: 0.19724828}
   m_Children: []
   m_Father: {fileID: 0}
