@@ -9,7 +9,7 @@ public class CollisionDamage : MonoBehaviour
         //Debug.Log("collision " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("BabyDuck"))
         {
-            var direction = -collision.impulse.normalized;
+            var direction = (collision.gameObject.transform.position - this.transform.position);
             var impact = new Vector3(direction.x, 0.2f, direction.z);
 
             collision.gameObject.GetComponent<Duck>().killDuck(impact, 30f);
