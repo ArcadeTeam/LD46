@@ -32,10 +32,18 @@ public class DuckController : Duck
     public GameObject featherParticleEffect;
     private bool particleActivate = false;
 
+    private GameObject honk;
+    private float honkStart = 0f;
+
+    private AudioSource audio;
+
+
     void Start()
     {
         SprintSpeed = Speed * 2f;
-
+        honk = transform.Find("Honk").gameObject;
+        audio = GetComponent<AudioSource>();
+        honk.SetActive(false);
         nearBabies = new HashSet<BabyDuckController>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
         _body.useGravity = false;
@@ -118,13 +126,51 @@ public class DuckController : Duck
                 rotationSpeed = 4f;
             }
 
-            //quack logic
-            if (Input.GetButtonDown("Fire2")) {
-                foreach (BabyDuckController baby in nearBabies) {
-                    baby.GoWithMom(transform);
-                }
-                getCloseHumans().ForEach(human => human.duckQuacked(transform.position));
+
+
+            //honk logic
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                honkStart = Time.realtimeSinceStartup;
+                honk.SetActive(true);
             }
+
+            if (Input.GetButton("Fire2"))
+            {
+                if (Time.realtimeSinceStartup - honkStart > 0.25f)
+                {
+                    if (!audio.isPlaying)
+                    {
+                        audio.loop = true;
+                        audio.clip = (AudioClip) Resources.Load("sounds/honk/longHonk");
+                        audio.Play();
+                    }
+
+                    getCloseHumans().ForEach(human => human.duckQuacked(transform.position));
+                    
+                }
+            }
+
+            if (Input.GetButtonUp("Fire2"))
+            {
+                if (Time.realtimeSinceStartup - honkStart <= 0.25f)
+                {
+                    audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/babiesHonk"));
+                    StartCoroutine(disableHonk(0.5f));
+                    foreach (BabyDuckController baby in nearBabies)
+                    {
+                        baby.GoWithMom(transform);
+                    }
+                }
+                else
+                {
+                    audio.Stop();
+                    honk.SetActive(false);
+                }
+            }
+
+
 
         }
         else
@@ -140,6 +186,12 @@ public class DuckController : Duck
         }
 
 
+    }
+
+    private IEnumerator disableHonk(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        honk.SetActive(false);
     }
 
     private List<HumanController> getCloseHumans()
