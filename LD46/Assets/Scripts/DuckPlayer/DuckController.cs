@@ -66,7 +66,11 @@ public class DuckController : Duck
             //applying gravity
             if (planning)
             {
-                if (_body.velocity.y > -0.1f) _body.AddForce(0.2f * Physics.gravity * (_body.mass * _body.mass));
+                if (_body.velocity.y > -0.1f)
+                {
+                    _body.AddForce(0.2f * Physics.gravity * (_body.mass * _body.mass));
+                    _body.velocity = new Vector3(_body.velocity.x, _body.velocity.y, _body.velocity.z);
+                }
             }
             else
             {
