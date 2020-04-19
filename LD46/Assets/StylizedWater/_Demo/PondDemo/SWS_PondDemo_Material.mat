@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: SWS_PondDemo_Material
   m_Shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
-  m_ShaderKeywords: _ENABLE_VC_ON _KEYWORD0_ON _PIXELATE_ON _SECONDARYFOAMALWAYSVISIBLE_ON
-    _UNLIT_ON _WORLDSPACETILING_ON
+  m_ShaderKeywords: _ENABLE_VC_ON _KEYWORD0_ON _MACRO_WAVES_ON _NORMAL_MAP_ON _PIXELATE_ON
+    _SECONDARYFOAMALWAYSVISIBLE_ON _UNLIT_ON _USE_VC_INTERSECTION_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -62,22 +62,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _Depth: 3.8
+    - _Depth: 12
     - _Depthdarkness: 0
     - _ENABLE_GRADIENT: 0
     - _ENABLE_NORMALS: 1
     - _ENABLE_SHADOWS: 0
     - _ENABLE_VC: 1
-    - _EdgeFade: 0.74
+    - _EdgeFade: 0.06
     - _EnableVertexColors: 1
     - _Float3: 0.85
     - _FoamDistortion: 0.06
     - _FoamOpacity: 0.079
-    - _FoamSize: 0
-    - _FoamSpeed: 0.12
+    - _FoamSize: 0.07
+    - _FoamSpeed: 0.381
     - _FoamTiling: 1
     - _Fresnelexponent: 1.38
-    - _Glossiness: 0.96
+    - _Glossiness: 0.01
     - _HighlightPanning: 0
     - _IntersectionDistortion: 0.1
     - _Keyword0: 1
@@ -99,8 +99,8 @@ Material:
     - _RimContrast: 1
     - _RimDistance: 1.13
     - _RimDistortion: 0.041
-    - _RimSize: 14.8
-    - _Rimfalloff: 14.9
+    - _RimSize: 0.377
+    - _Rimfalloff: 15.4
     - _Rimtiling: 1.1599996
     - _SECONDARY_WAVES: 0
     - _SurfaceHighlight: 0
@@ -110,23 +110,23 @@ Material:
     - _Surfacehightlightsize: 0
     - _Tessellation: 20
     - _Tiling: 0.7500001
-    - _Transparency: 0.884
-    - _USE_VC_INTERSECTION: 0
+    - _Transparency: 1
+    - _USE_VC_INTERSECTION: 1
     - _Unlit: 1
     - _UseIntersectionFoam: 0
     - _UseIntersectionHighlight: 1
-    - _WaveFoam: 0
+    - _WaveFoam: 0.477
     - _WaveHeight: 0.104
     - _WaveSize: 2.77
     - _Wavefoam: 1
     - _Wavesspeed: 1.93
     - _Wavesstrength: 0.093
-    - _Wavetint: -0.171
-    - _Worldspacetiling: 1
+    - _Wavetint: -0.271
+    - _Worldspacetiling: 0
     - __dirty: 0
     m_Colors:
     - _FresnelColor: {r: 0.29411763, g: 0.64949304, b: 1, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0.134}
-    - _WaterColor: {r: 0.019802418, g: 0.7388628, b: 0.8396226, a: 0}
+    - _WaterColor: {r: 0.23851903, g: 0.6905009, b: 0.754717, a: 0}
     - _WaterShallowColor: {r: 0, g: 0.91724133, b: 1, a: 0.609}
     - _WaveDirection: {r: 0.01, g: 0, b: 0.69, a: 0}
