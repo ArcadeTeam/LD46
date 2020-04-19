@@ -32,6 +32,8 @@ public class HumanController : MonoBehaviour
     private Vector3 duckPosition;
 
     private float defaultSpeed;
+
+    public GameObject bones;
     
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,7 @@ public class HumanController : MonoBehaviour
         walkRadius = Random.Range(10f, 30f);
         lastPosition = transform.position;
         setState(CharState.Idle);
+        bones.SetActive(false);
     }
 
 
@@ -234,5 +237,13 @@ public class HumanController : MonoBehaviour
 
             return hit.position;
         }
+    }
+
+    public void Die() {
+        animator.enabled = false;
+        bones.SetActive(true);
+        agent.enabled = false;
+        this.enabled = false;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
 }
