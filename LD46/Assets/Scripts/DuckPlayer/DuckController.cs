@@ -36,7 +36,7 @@ public class DuckController : Duck
     private float honkStart = 0f;
 
     private AudioSource audio;
-
+    private Animator animator;
 
     void Start()
     {
@@ -48,6 +48,7 @@ public class DuckController : Duck
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
         _body.useGravity = false;
         resetDuckAlignment();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     public void resetDuck(Vector3 position)
@@ -227,6 +228,12 @@ public class DuckController : Duck
         {
             var speed = Speed;
             if (isSprinting) speed = SprintSpeed;
+
+            Debug.Log(_body.velocity.magnitude);
+
+            animator.SetBool("Idle", _body.velocity.magnitude == 0f);
+            animator.SetBool("Planning", !_isGrounded);
+            animator.SetBool("Sprinting", isSprinting);
 
             var orientation = orientatedInput;
             if (!_isGrounded) orientation = Vector3.Lerp(orientation, lastOrientationWhenGrounded, 0.25f);
