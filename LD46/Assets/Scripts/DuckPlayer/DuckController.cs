@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DuckController : Duck
@@ -67,7 +68,6 @@ public class DuckController : Duck
             if (planning)
             {
                 _body.AddForce(0.2f * Physics.gravity * (_body.mass * _body.mass));
-                Debug.Log(_body.velocity.y);
                 if (_body.velocity.y < -0.7f)
                 {
                     _body.velocity = new Vector3(_body.velocity.x, -0.7f, _body.velocity.z);
@@ -133,6 +133,7 @@ public class DuckController : Duck
                 foreach (BabyDuckController baby in nearBabies) {
                     baby.GoWithMom(transform);
                 }
+                getCloseHumans().ForEach(human => human.duckQuacked(transform.position));
             }
 
         }
@@ -144,6 +145,17 @@ public class DuckController : Duck
         }
 
 
+    }
+
+    private List<HumanController> getCloseHumans()
+    {
+        List<HumanController> humans = Physics.OverlapSphere(transform.position, 4f)
+            .Select(hit => hit.transform.gameObject.GetComponent<HumanController>())
+            .Where(hc => hc != null && hc != this)
+            .ToList();
+
+
+        return humans;
     }
 
     private bool isSprinting()

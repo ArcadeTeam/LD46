@@ -29,17 +29,21 @@ public class HumanController : MonoBehaviour
     private float lastPathChange = 0f;
     private HumanController other;
     private Vector3 lastWalkingOrientation;
+    private Vector3 duckPosition;
+
+    private float defaultSpeed;
     
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        defaultSpeed = agent.speed;
         agent.destination = GetRandomPoint();
         animator = GetComponent<Animator>();
         setState(CharState.Walking);
         walkRadius = Random.Range(10f, 30f);
         lastPosition = transform.position;
-        setState(CharState.Idle);
+        setState(CharState.Running);
     }
 
 
@@ -95,8 +99,27 @@ public class HumanController : MonoBehaviour
             ChangePath();
         }
 
+        //pass from scared to running
+        if (currentState == CharState.Scared && timeInThisState() > 3f)
+        {
+            var nextPosition = transform.position + (transform.position - duckPosition).normalized * 500f;
+            agent.destination = nextPosition;
+            lastPathChange = Time.realtimeSinceStartup;
+            lastPosition = transform.position;
+            setState(CharState.Running);
+        }
+
     }
 
+
+    public void duckQuacked(Vector3 duckPosition)
+    {
+        if (currentState != CharState.Running && currentState != CharState.Scared)
+        {
+            setState(CharState.Scared);
+            this.duckPosition = duckPosition;
+        }
+    }
 
     public Boolean otherWantsToTalk(HumanController other)
     {
@@ -143,11 +166,19 @@ public class HumanController : MonoBehaviour
         
         switch (state)
         {
+            case CharState.Running:
+                agent.speed = defaultSpeed * 2;
+                agent.isStopped = false;
+                break;
+            case CharState.Scared:
+                agent.isStopped = true;
+                return;
             case CharState.Talking:
                 agent.isStopped = true;
                 animator.speed = 0.6f + Random.value * 0.4f;
                 break;
             default:
+                agent.speed = defaultSpeed;
                 agent.isStopped = false;
                 animator.speed = 1f;
                 break;
@@ -160,6 +191,11 @@ public class HumanController : MonoBehaviour
         if (Vector3.Distance(transform.position, lastPosition) < walkThreshold)
         {
             var nextPosition = GetRandomPoint();
+            if (currentState == CharState.Scared || currentState == CharState.Running)
+            {
+                nextPosition = transform.position + (transform.position - duckPosition).normalized * 500f;
+            }
+
             if (nextPosition.x != Mathf.Infinity)
             {
                 //Debug.Log(nextPosition);
