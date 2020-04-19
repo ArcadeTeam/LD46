@@ -43,7 +43,7 @@ public class HumanController : MonoBehaviour
         setState(CharState.Walking);
         walkRadius = Random.Range(10f, 30f);
         lastPosition = transform.position;
-        setState(CharState.Running);
+        setState(CharState.Idle);
     }
 
 
@@ -109,6 +109,13 @@ public class HumanController : MonoBehaviour
             setState(CharState.Running);
         }
 
+        //pass from running to walking
+        if (currentState == CharState.Running && timeInThisState() > 5f)
+        {
+            setState(CharState.Walking);
+            ChangePath();
+        }
+
     }
 
 
@@ -167,10 +174,12 @@ public class HumanController : MonoBehaviour
         switch (state)
         {
             case CharState.Running:
+                animator.speed = 1f;
                 agent.speed = defaultSpeed * 2;
                 agent.isStopped = false;
                 break;
             case CharState.Scared:
+                animator.speed = 1f;
                 agent.isStopped = true;
                 return;
             case CharState.Talking:
@@ -187,7 +196,6 @@ public class HumanController : MonoBehaviour
 
     private void ChangePath()
     {
-        
         if (Vector3.Distance(transform.position, lastPosition) < walkThreshold)
         {
             var nextPosition = GetRandomPoint();
