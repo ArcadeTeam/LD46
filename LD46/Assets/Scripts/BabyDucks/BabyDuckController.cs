@@ -8,12 +8,16 @@ public class BabyDuckController : Duck
     public Transform destination;
     NavMeshAgent agent;
     int distractionProbability = 0;
+    [SerializeField] Animator animator;
+
     void Start() {
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update() {
         if (dead) return;
+
+        animator.SetBool("Running", agent.velocity.magnitude > 0f);           
 
         if (destination != null)
             agent.destination = destination.position;
