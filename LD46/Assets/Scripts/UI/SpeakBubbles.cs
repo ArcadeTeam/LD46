@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class SpeakBubbles : MonoBehaviour
 {
-    [SerializeField] Image firstImg;
-    [SerializeField] Image secondImg;
-    [SerializeField] float time;
+    public Image firstImg;
+    public Image secondImg;
+    public float time;
 
     float counter = 0.0f;
+
     void Start() {
-        secondImg.enabled = false;        
+        secondImg.enabled = false;
     }
     void Update() {
         transform.rotation = Camera.main.transform.rotation;
