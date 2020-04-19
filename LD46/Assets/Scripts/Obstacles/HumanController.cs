@@ -28,6 +28,7 @@ public class HumanController : MonoBehaviour
     private float lastStateChange = 0f;
     private float lastPathChange = 0f;
     private HumanController other;
+    private Vector3 lastWalkingOrientation;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class HumanController : MonoBehaviour
         setState(CharState.Walking);
         walkRadius = Random.Range(10f, 30f);
         lastPosition = transform.position;
+        setState(CharState.Idle);
     }
 
 
@@ -46,9 +48,15 @@ public class HumanController : MonoBehaviour
 
         var close = getCloseHumans();
 
+        //talk with someone
+        if (currentState == CharState.Idle)
+        {
+            setState(CharState.Walking);
+        }
+
 
         //talk with someone
-        if (currentState == CharState.Walking && timeInThisState() > 6f)
+            if (currentState == CharState.Walking && timeInThisState() > 6f)
         {
             if (close.Count > 0)
             {
@@ -65,16 +73,22 @@ public class HumanController : MonoBehaviour
         //while talking, look at the other character
         if (currentState == CharState.Talking)
         {
-            transform.forward = (other.transform.position - transform.position);
+            transform.forward = Vector3.Lerp(lastWalkingOrientation,(other.transform.position - transform.position), timeInThisState() * 5f);
         }
 
         //stop talking
-            if (currentState == CharState.Talking && timeInThisState() > 6f)
+            if (currentState == CharState.Talking && timeInThisState() > 8f)
         {
             ChangePath();
             setState(CharState.Walking);
         }
 
+
+
+        if (currentState == CharState.Walking)
+        {
+                lastWalkingOrientation = transform.forward;
+        }
         //move to another location
         if (currentState == CharState.Walking && timeInThisPath() > 3f)
         {
@@ -121,12 +135,17 @@ public class HumanController : MonoBehaviour
     {
         currentState = state;
         lastStateChange = Time.realtimeSinceStartup;
-        animator.Play(currentState.ToString());
+
+        foreach (CharState value in Enum.GetValues(typeof(CharState)))
+        {
+            animator.SetBool(value.ToString(),currentState == value);
+        }
+        
         switch (state)
         {
             case CharState.Talking:
                 agent.isStopped = true;
-                animator.speed = 0.7f + Random.value * 0.3f;
+                animator.speed = 0.6f + Random.value * 0.4f;
                 break;
             default:
                 agent.isStopped = false;
