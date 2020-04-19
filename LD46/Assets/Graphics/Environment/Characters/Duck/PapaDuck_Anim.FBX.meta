@@ -198,8 +198,64 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone022
+        weight: 1
+      - path: Bone022/Bone010
+        weight: 1
+      - path: Bone022/Bone010/Bone011
+        weight: 1
+      - path: Bone022/Bone010/Bone011/Bone012
+        weight: 1
+      - path: Bone022/Bone010(mirrored)
+        weight: 1
+      - path: Bone022/Bone010(mirrored)/Bone011(mirrored)
+        weight: 1
+      - path: Bone022/Bone010(mirrored)/Bone011(mirrored)/Bone012(mirrored)
+        weight: 1
+      - path: Bone022/Bone015
+        weight: 1
+      - path: Bone022/Bone015/Bone013
+        weight: 1
+      - path: Bone022/Bone015/Bone016
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone005
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone005/Bone006
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone005/Bone006/Bone007
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone005/Bone006/Bone007/Bone008
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone005/Bone006/Bone007/Bone008/Bone001
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone005/Bone006/Bone007/Bone008/Bone003
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017/Bone018
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017/Bone018/Bone019/Bone020
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017/Bone018/Bone019/Bone020/Bone021
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017(mirrored)
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017(mirrored)/Bone018(mirrored)
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017(mirrored)/Bone018(mirrored)/Bone019(mirrored)
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017(mirrored)/Bone018(mirrored)/Bone019(mirrored)/Bone020(mirrored)
+        weight: 1
+      - path: Bone022/Bone015/Bone016/Bone017(mirrored)/Bone018(mirrored)/Bone019(mirrored)/Bone020(mirrored)/Bone021(mirrored)
+        weight: 1
+      - path: Pato
+        weight: 1
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
