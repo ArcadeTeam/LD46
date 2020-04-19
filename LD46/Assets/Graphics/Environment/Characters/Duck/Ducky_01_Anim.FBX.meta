@@ -1,9 +1,17 @@
 fileFormatVersion: 2
-guid: 9be2d8bb03dc6b9458e0424f08b9163b
+guid: 60949533a90e82b4cb0737b49ba0f723
 ModelImporter:
   serializedVersion: 19300
-  internalIDToNameTable: []
-  externalObjects: {}
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: defaultMat
+    second: {fileID: 2100000, guid: 7c6d51b6c5f9ae94382f0f0126e2bc31, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -68,7 +76,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
