@@ -18,13 +18,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMPro.TMP_Text gameOverText;
     [SerializeField] float fadeTime = 2f;
 
-    void Start()
-    {
+    GameObject player;
+
+    void Start() {
         duckWinCount = 3;//spawner.childCount;
+        player = GameObject.Find("DuckPlayer");
     }
 
-    void Update()
-    {
+    void Update() {
         
     }
 

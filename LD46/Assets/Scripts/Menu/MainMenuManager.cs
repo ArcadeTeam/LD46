@@ -8,6 +8,7 @@ public class MainMenuManager : MonoBehaviour
 {
 
     [SerializeField] float fadeTime = 2f;
+    [SerializeField] float cinematicTime = 20f;
     public Image fadePanel;
     public GameObject m_panelMenu;
 
@@ -59,20 +60,26 @@ public class MainMenuManager : MonoBehaviour
     public void SetFullscreen(bool value) { settings.SetFullscreen(value); }
     public void SetResolution(int value) { settings.SetResolution(value); }
 
-    void Update()
-    {
+    void Update() {
 
-        counter += Time.deltaTime;
-        if (counter > 75f)
-        {
-            counter = 0;
-            splineController.FollowSpline();
-        }
     }
 
-    public void Play() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);}
+    public void Play() {
+        GameObject.Find("MenuCanvas").SetActive(false);
+        m_panelMenu.SetActive(false);
+        splineController.FollowSpline();
+        StartCoroutine(LoadGameScene());
+    }
 
     public void Quit() { Application.Quit();}
+
+    IEnumerator LoadGameScene() {
+        for (float t = 0.0f; t < cinematicTime;) {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 
     IEnumerator Fading()
     {
@@ -91,5 +98,6 @@ public class MainMenuManager : MonoBehaviour
             fadePanel.color = new Color(0f, 0f, 0f, t / (fadeTime));
             yield return null;
         }
+        fadePanel.gameObject.SetActive(false);
     }
 }
