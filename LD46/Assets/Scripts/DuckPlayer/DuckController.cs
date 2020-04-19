@@ -39,8 +39,6 @@ public class DuckController : Duck
     private AudioSource audio;
     private Animator animator;
 
-    bool walking = false;
-
     void Start()
     {
         SprintSpeed = Speed * 2f;
@@ -95,12 +93,11 @@ public class DuckController : Duck
             _inputs.x = Input.GetAxis("Horizontal");
             _inputs.z = Input.GetAxis("Vertical");
             if (_inputs != Vector3.zero) {
-                walking = true;
                 Quaternion lookOnLook = Quaternion.LookRotation(-_inputs);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, Time.deltaTime * rotationSpeed);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, Time.deltaTime * Vector3.Distance(transform.forward, _inputs) * rotationSpeed);// rotationSpeed);
                 orientatedInput = transform.forward;
             } else {
-                walking = false;
                 orientatedInput = Vector3.zero;
             }
 
@@ -234,8 +231,6 @@ public class DuckController : Duck
         {
             var speed = Speed;
             if (isSprinting) speed = SprintSpeed;
-
-            Debug.Log(_body.velocity.magnitude);
 
             animator.SetBool("Idle", _body.velocity.magnitude < 0.000000000001f);
             animator.SetBool("Planning", !_isGrounded);
