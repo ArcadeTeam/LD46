@@ -254,7 +254,7 @@ ModelImporter:
       - path: Bone022/Bone015/Bone016/Bone017(mirrored)/Bone018(mirrored)/Bone019(mirrored)/Bone020(mirrored)/Bone021(mirrored)
         weight: 1
       - path: Pato
-        weight: 1
+        weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
