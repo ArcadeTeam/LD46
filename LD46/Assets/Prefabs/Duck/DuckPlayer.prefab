@@ -10043,6 +10043,8 @@ MonoBehaviour:
   firstImg: {fileID: 3908704436567578691}
   secondImg: {fileID: 3908704436242260719}
   time: 0.25
+  targetPos: {fileID: 0}
+  offsetPos: {x: 0, y: 0, z: 0}
 --- !u!54 &6274089920293435170
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10260,7 +10262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splash: {fileID: 8040615491773429753}
-  rotationSpeed: 4
+  rotationSpeed: 10
   Ground:
     serializedVersion: 2
     m_Bits: 0
@@ -10634,6 +10636,8 @@ MonoBehaviour:
   firstImg: {fileID: 8834743907224757838}
   secondImg: {fileID: 8834743905351212258}
   time: 0.25
+  targetPos: {fileID: 0}
+  offsetPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &1733832758
 PrefabInstance:
   m_ObjectHideFlags: 0
