@@ -133,7 +133,7 @@ public class DuckController : Duck
 
             //honk logic
             animator.SetBool("Honking", false);
-            if (Input.GetButtonDown("Fire2") || Input.GetButtonDown("Submit"))
+            if (Input.GetButtonDown("Fire2"))
             {
                 honkStart = Time.realtimeSinceStartup;
                 animator.SetBool("Honking", true);
@@ -150,7 +150,7 @@ public class DuckController : Duck
                         audio.clip = (AudioClip) Resources.Load("sounds/honk/longHonk");
                         audio.Play();
                     }
-
+                    animator.SetBool("Honking", true);
                     getCloseHumans().ForEach(human => human.duckQuacked(transform.position));
                     
                 }
