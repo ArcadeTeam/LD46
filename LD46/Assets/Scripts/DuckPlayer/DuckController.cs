@@ -235,13 +235,14 @@ public class DuckController : Duck
             var speed = Speed;
             if (isSprinting) speed = SprintSpeed;
 
-            animator.SetBool("Idle", _body.velocity.magnitude < 0.000000000001f);
-            animator.SetBool("Planning", !_isGrounded);
-            animator.SetBool("Sprinting", isSprinting);
 
             var orientation = orientatedInput;
             if (!_isGrounded) orientation = Vector3.Lerp(orientation, lastOrientationWhenGrounded, 0.25f);
             _body.MovePosition(_body.position + orientation * speed * Time.fixedDeltaTime);
+
+            animator.SetBool("Idle", orientation.magnitude < 0.000000000001f);
+            animator.SetBool("Planning", !_isGrounded);
+            animator.SetBool("Sprinting", isSprinting);
         }
         else
         {
