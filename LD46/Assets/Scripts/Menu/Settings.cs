@@ -39,11 +39,11 @@ public class Settings : MonoBehaviour
         SetMusicVolume(musicVolume);
         if (PlayerPrefs.HasKey("sensibility")) sensibility = PlayerPrefs.GetFloat("sensibility");
         SetSensibility(sensibility);
-        if (PlayerPrefs.HasKey("quality")) quality = PlayerPrefs.GetInt("quality");
-        SetQuality(quality);
+        /*if (PlayerPrefs.HasKey("quality")) quality = PlayerPrefs.GetInt("quality");
+        SetQuality(quality);*/
         if (PlayerPrefs.HasKey("fullscreen")) fullscreen = System.Convert.ToBoolean(PlayerPrefs.GetInt("fullscreen"));
         SetFullscreen(fullscreen);
-
+        
         foreach (Resolution r in Screen.resolutions) {
             if(r.refreshRate == Screen.currentResolution.refreshRate)
                 resolutions.Add(r);
