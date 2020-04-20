@@ -52,13 +52,16 @@ public class BabyDuckController : Duck
     {
         yield return new WaitForSeconds(waitTime+Random.value*0.75f);
         honk.SetActive(true);
-        audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/babyDuckHonk"));
-        StartCoroutine(disableHonk(0.5f));
+        audio.loop = true;
+        audio.clip = (AudioClip) Resources.Load("sounds/honk/BABY_DUCK_" + (1 + (int) (Random.value * 4)));
+        audio.Play();
+        StartCoroutine(disableHonk(0.75f + Random.value * 1f));
     }
 
     private IEnumerator disableHonk(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+        audio.loop = false;
         honk.SetActive(false);
     }
 
