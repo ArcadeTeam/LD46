@@ -31,6 +31,7 @@ public class RagdollController : MonoBehaviour
     }
 
     public void ActivateRagdoll() {
+        Debug.Log("WOLOLOOOOO");
         capsuleCollider.enabled = false;
         rigidbody.isKinematic = true;
         animator.enabled = false;

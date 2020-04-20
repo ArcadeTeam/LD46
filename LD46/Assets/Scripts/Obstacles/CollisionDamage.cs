@@ -6,7 +6,6 @@ public class CollisionDamage : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("collision " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("BabyDuck"))
         {
             var direction = (collision.gameObject.transform.position - this.transform.position);

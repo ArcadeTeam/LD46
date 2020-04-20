@@ -22,18 +22,18 @@ public class Duck : MonoBehaviour
         GetComponent<Rigidbody>().freezeRotation = false;
         _body.velocity = impactOrientation.normalized * impactSpeed;
         _body.AddTorque(new Vector3(0f, 10f, 10f));
-        dead = true;
+        
         if (gameObject.CompareTag("Player") && !dead) {
             /* gameObject.GetComponent<Animator>().enabled = false;
-             gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-             GetComponent<Rigidbody>().freezeRotation = true;*/
+             gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);*/
+             GetComponent<Rigidbody>().freezeRotation = true;
             //GetComponent<CapsuleCollider>().enabled = false;
-            //GameObject.Find("DuckCamera").GetComponent<CameraFollower>().enabled = false;
-            GetComponent<RagdollController>().ActivateRagdoll();
+            GameObject.Find("DuckCamera").GetComponent<CameraFollower>().enabled = false;
+            Debug.Log("EEEEEEh");
+            gameObject.GetComponent<RagdollController>().ActivateRagdoll();
             GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
         }
-
-
+        dead = true;
     }
 
     public void EnterWater()
