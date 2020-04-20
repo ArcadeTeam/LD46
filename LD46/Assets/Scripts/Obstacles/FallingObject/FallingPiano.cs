@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingObject : MonoBehaviour
+public class FallingPiano : MonoBehaviour
 {
+    public GameObject brokenObject;
     public bool canKill = true;
     private Projector projector;
     private bool hasBeenHit = false;
-
-    //public AudioClip fallingSound;
-    public AudioClip objectSound;
-    private AudioSource audio;
-
     void Start()
     {
-        audio = GetComponent<AudioSource>();
         projector = GetComponentInChildren<Projector>();
     }
 
@@ -22,8 +17,8 @@ public class FallingObject : MonoBehaviour
     {
         if (!hasBeenHit)
         {
-            audio.clip = objectSound;
-            audio.Play();
+            brokenObject.transform.position = transform.position;
+            brokenObject.SetActive(true);
 
             hasBeenHit = true;
             projector.enabled = false;
@@ -35,7 +30,15 @@ public class FallingObject : MonoBehaviour
 
                 collision.gameObject.GetComponent<Duck>().killDuck(impact, 30f);
             }
+
+            if (collision.gameObject.CompareTag("Human"))
+            {
+                HumanController human = collision.gameObject.GetComponent<HumanController>();
+                if (human != null)
+                    human.Die();
+            }
+
+            gameObject.SetActive(false);
         }
     }
-
 }

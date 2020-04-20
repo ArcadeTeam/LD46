@@ -58,5 +58,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 5964691833037261890, guid: a33bcccce1a347043b253aa1fd1f5a4d, type: 3}
   - {fileID: 4015470557764263945, guid: 0b074ee3b8876ce4dad698705900a3f6, type: 3}
