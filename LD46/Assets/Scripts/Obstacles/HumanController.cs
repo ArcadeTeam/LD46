@@ -12,10 +12,12 @@ public enum CharState{Idle, Walking, Talking, Scared, Running }
 
 public class HumanController : MonoBehaviour
 {
+    public bool debugMode = false;
+
     public BoxCollider area;
     private float walkRadius;
     private float changePathTimeout = 5f;
-    private float walkThreshold = 2f;
+    private float walkThreshold = 0.1f;
 
     private Vector3 lastPosition;
 
@@ -33,7 +35,10 @@ public class HumanController : MonoBehaviour
     private float defaultSpeed;
 
     public GameObject bones;
-    
+
+    private float timeToStartWalking;
+    private float timeTalking;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +46,6 @@ public class HumanController : MonoBehaviour
         defaultSpeed = agent.speed;
         agent.destination = GetRandomPoint();
         animator = GetComponent<Animator>();
-        setState(CharState.Walking);
         walkRadius = Random.Range(10f, 30f);
         lastPosition = transform.position;
         setState(CharState.Idle);
@@ -51,74 +55,89 @@ public class HumanController : MonoBehaviour
 
     void Update()
     {
-
         var close = getCloseHumans();
 
         //talk with someone
         if (currentState == CharState.Idle)
         {
-            setState(CharState.Walking);
+            if (timeInThisState() > timeToStartWalking)
+                setState(CharState.Walking);
         }
 
-
-        //talk with someone
-            if (currentState == CharState.Walking && timeInThisState() > 6f)
+        if (currentState == CharState.Walking)
         {
-            if (close.Count > 0)
+            lastWalkingOrientation = transform.forward;
+
+            //talk with someone
+            if (timeInThisState() > 6f)
             {
-                var success = close.First().otherWantsToTalk(this);
-                if (success)
+                if (close.Count > 0)
                 {
-                    other = close.First();
-                    setState(CharState.Talking);
-                   
+                    var success = close.First().otherWantsToTalk(this);
+                    if (success)
+                    {
+                        other = close.First();
+                        setState(CharState.Talking);
+                    }
                 }
             }
+
+            //exit condition
+            if (agent.remainingDistance == Mathf.Infinity ||(!agent.pathPending && agent.remainingDistance < walkThreshold))
+                setState(CharState.Idle);
+
         }
 
         //while talking, look at the other character
         if (currentState == CharState.Talking)
         {
             transform.forward = Vector3.Lerp(lastWalkingOrientation,(other.transform.position - transform.position), timeInThisState() * 5f);
-        }
 
-        //stop talking
-            if (currentState == CharState.Talking && timeInThisState() > 8f)
-        {
-            ChangePath();
-            setState(CharState.Walking);
-        }
-
-
-
-        if (currentState == CharState.Walking)
-        {
-                lastWalkingOrientation = transform.forward;
-        }
-        //move to another location
-        if (currentState == CharState.Walking && timeInThisPath() > 3f)
-        {
-            ChangePath();
+            //stop talking
+            if (timeInThisState() > timeTalking)
+            {
+                animator.SetBool("Talking", false);
+                setState(CharState.Idle);
+            }
+                
         }
 
         //pass from scared to running
         if (currentState == CharState.Scared && timeInThisState() > 2f)
         {
-            var nextPosition = transform.position + (transform.position - duckPosition).normalized * 500f;
-            agent.destination = nextPosition;
+            var nextPosition = transform.position + (transform.position - duckPosition).normalized * 10f;
+
             lastPathChange = Time.realtimeSinceStartup;
             lastPosition = transform.position;
+
+            NavMeshHit hit;
+            NavMesh.SamplePosition(nextPosition, out hit, walkRadius, 1);
+
+            if (debugMode) Debug.Log(hit.position);
+
+            agent.SetDestination(hit.position);
+
+            animator.SetBool("Scared", false);
             setState(CharState.Running);
         }
 
-        //pass from running to walking
-        if (currentState == CharState.Running && timeInThisState() > 5f)
+        //pass from running to idle
+        if (currentState == CharState.Running)
         {
-            setState(CharState.Walking);
-            ChangePath();
+            if (agent.remainingDistance == Mathf.Infinity 
+                || (!agent.pathPending && agent.remainingDistance < walkThreshold)
+                || timeInThisState() > 5f)
+            {
+                animator.SetBool("Running", false);
+                setState(CharState.Idle);
+            }
         }
     }
 
+    private void LateUpdate()
+    {
+        animator.SetBool("Walking", agent.velocity.normalized.magnitude > 0);
+    }
 
     public void duckQuacked(Vector3 duckPosition)
     {
@@ -167,23 +186,42 @@ public class HumanController : MonoBehaviour
         currentState = state;
         lastStateChange = Time.realtimeSinceStartup;
 
-        foreach (CharState value in Enum.GetValues(typeof(CharState)))
-        {
-            animator.SetBool(value.ToString(),currentState == value);
-        }
+        if (debugMode)  Debug.Log("STATE: " + state);
         
         switch (state)
         {
+            case CharState.Idle:
+                var rand = Random.Range(0, 100);
+                if (rand < 100)
+                    timeToStartWalking = Random.Range(1f, 5f);
+                else
+                    timeToStartWalking = Random.Range(1f, 30f);
+
+                agent.speed = defaultSpeed;
+                agent.isStopped = false;
+                animator.speed = 1f;
+                break;
+            case CharState.Walking:
+                var nextPosition = GetRandomPoint();
+                agent.speed = defaultSpeed;
+                agent.isStopped = false;
+                animator.speed = 1f;
+                agent.SetDestination(nextPosition);
+                break;
             case CharState.Running:
+                animator.SetBool("Running", true);
                 animator.speed = 1f;
                 agent.speed = defaultSpeed * 2;
                 agent.isStopped = false;
                 break;
             case CharState.Scared:
+                animator.SetBool("Scared", true);
                 animator.speed = 1f;
                 agent.isStopped = true;
                 return;
             case CharState.Talking:
+                animator.SetBool("Talking", true);
+                timeTalking = Random.Range(6f, 12f);
                 agent.isStopped = true;
                 animator.speed = 0.6f + Random.value * 0.4f;
                 break;
