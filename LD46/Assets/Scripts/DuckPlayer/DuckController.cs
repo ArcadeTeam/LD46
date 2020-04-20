@@ -31,7 +31,6 @@ public class DuckController : Duck
 
     private bool isSprinting = false;
 
-    public GameObject featherParticleEffect;
     private bool particleActivate = false;
 
     private GameObject honk;

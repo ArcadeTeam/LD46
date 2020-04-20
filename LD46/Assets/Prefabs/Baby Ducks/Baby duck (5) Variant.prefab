@@ -10,17 +10,17 @@ PrefabInstance:
     - target: {fileID: 1946087373547897608, guid: fc32c4d83c980f640ab1cf3cb975d38f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5500001
+      value: 145.64
       objectReference: {fileID: 0}
     - target: {fileID: 1946087373547897608, guid: fc32c4d83c980f640ab1cf3cb975d38f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08989817
+      value: 24.65
       objectReference: {fileID: 0}
     - target: {fileID: 1946087373547897608, guid: fc32c4d83c980f640ab1cf3cb975d38f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 88.69
+      value: 96.8
       objectReference: {fileID: 0}
     - target: {fileID: 1946087373547897608, guid: fc32c4d83c980f640ab1cf3cb975d38f,
         type: 3}
@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 5757682998037720242, guid: fc32c4d83c980f640ab1cf3cb975d38f,
         type: 3}
       propertyPath: m_Name
-      value: Baby duck (5)
+      value: Baby duck (5) Variant (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7620040223190032515, guid: fc32c4d83c980f640ab1cf3cb975d38f,
         type: 3}
