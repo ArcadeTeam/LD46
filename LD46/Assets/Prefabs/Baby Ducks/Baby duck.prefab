@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4292267864500397460}
   - component: {fileID: 2923521251064845779}
   - component: {fileID: 7598259295944971967}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Baby duck
   m_TagString: BabyDuck
   m_Icon: {fileID: 0}
@@ -131,9 +131,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 32
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -166,7 +166,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 4703642663734550498}
   - component: {fileID: 5951680323661968532}
   - component: {fileID: 6930866117147085803}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterSplashSmall
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010627174008, guid: d8f70542bf2f32c4c8225ca83c614f79, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1000010668098508, guid: d8f70542bf2f32c4c8225ca83c614f79, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -298,6 +302,10 @@ PrefabInstance:
     - target: {fileID: 1000012847954980, guid: d8f70542bf2f32c4c8225ca83c614f79, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012847954980, guid: d8f70542bf2f32c4c8225ca83c614f79, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4000012847917512, guid: d8f70542bf2f32c4c8225ca83c614f79, type: 3}
       propertyPath: m_LocalPosition.x
@@ -412,6 +420,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 5caed698772c6664e8299936f5ccc2c6, type: 2}
+    - target: {fileID: -5339355619053426210, guid: 60949533a90e82b4cb0737b49ba0f723,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 60949533a90e82b4cb0737b49ba0f723,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -467,10 +480,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3866946291455092441, guid: 60949533a90e82b4cb0737b49ba0f723,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 60949533a90e82b4cb0737b49ba0f723,
         type: 3}
       propertyPath: m_Name
       value: Ducky_01_Anim (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 60949533a90e82b4cb0737b49ba0f723,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5561581072481135605, guid: 60949533a90e82b4cb0737b49ba0f723,
         type: 3}
@@ -503,6 +526,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2430552423885992928, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3908704436117219445, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
         type: 3}
       propertyPath: m_Sprite
@@ -514,10 +542,20 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3908704436117219467, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3908704436396935920, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
         type: 3}
       propertyPath: m_Name
       value: Honk
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908704436396935920, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3908704436396935923, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
         type: 3}
@@ -659,6 +697,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908704436698911455, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8084726810289996363, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
         type: 3}

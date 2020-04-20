@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DuckController : Duck
 {
@@ -150,7 +151,7 @@ public class DuckController : Duck
                     if (!audio.isPlaying)
                     {
                         audio.loop = true;
-                        audio.clip = (AudioClip) Resources.Load("sounds/honk/longHonk");
+                        audio.clip = (AudioClip) Resources.Load("sounds/honk/DUCK_ANGRY_" + (1 + (int)(Random.value * 4)));
                         audio.Play();
                     }
                     animator.SetBool("Honking", true);
@@ -164,7 +165,7 @@ public class DuckController : Duck
                 if (Time.realtimeSinceStartup - honkStart <= 0.25f)
                 {
                     honk.SetActive(true);
-                    audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/callingHonk"));
+                    audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/DUCK_WORRIED_"+(1+(int)(Random.value*4))));
                     StartCoroutine(disableHonk(0.5f));
                     foreach (BabyDuckController baby in nearBabies)
                     {
@@ -173,7 +174,7 @@ public class DuckController : Duck
                 }
                 else
                 {
-                    audio.Stop();
+                    audio.loop = false;
                     honk.SetActive(false);
                 }
             }
