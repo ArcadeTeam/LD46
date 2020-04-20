@@ -9,6 +9,7 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] float fadeTime = 2f;
     [SerializeField] float cinematicTime = 20f;
+    [SerializeField] GameObject customizationPanel;
     public Image fadePanel;
     public GameObject m_panelMenu;
 
@@ -60,25 +61,29 @@ public class MainMenuManager : MonoBehaviour
     public void SetFullscreen(bool value) { settings.SetFullscreen(value); }
     public void SetResolution(int value) { settings.SetResolution(value); }
 
+    public void Ready() { SceneManager.LoadScene("Game"); }
+
+    public void NextSuit() { GameObject.Find("DuckPlayer").GetComponent<Customization>().NextItem(); }
+
     void Update() {
 
     }
 
     public void Play() {
-        GameObject.Find("MenuCanvas").SetActive(false);
+        GameObject.Find("Logo").SetActive(false);
         m_panelMenu.SetActive(false);
         splineController.FollowSpline();
-        StartCoroutine(LoadGameScene());
+        StartCoroutine(ShowCustomization());
     }
 
     public void Quit() { Application.Quit();}
 
-    IEnumerator LoadGameScene() {
+    IEnumerator ShowCustomization() {
         for (float t = 0.0f; t < cinematicTime;) {
             t += Time.deltaTime;
             yield return null;
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        customizationPanel.SetActive(true);
     }
 
     IEnumerator Fading()

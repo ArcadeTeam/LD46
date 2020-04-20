@@ -73,7 +73,6 @@ public class Settings : MonoBehaviour
         musicVolume = value;
         PlayerPrefs.SetFloat("volume", value);
         SetVolumeOf("volume", value);
-        print("Setting master to " + value);
     }
 
     public void SetMusicVolume(float value) { 
