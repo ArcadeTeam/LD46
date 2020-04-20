@@ -53,12 +53,15 @@ public class EnemyController : MonoBehaviour
         switch (currentState)
         {
             case State.Patrol:
+                animator.SetBool("Running", false);
                 PatrolProcess();
                 break;
             case State.Chase:
+                animator.SetBool("Running", true);
                 ChaseProcess();
                 break;
             case State.Hit:
+                animator.SetBool("Running", false);
                 ChaseProcess();
                 break;
             default:
@@ -95,9 +98,11 @@ public class EnemyController : MonoBehaviour
             agent.SetDestination(target.position);
     }
 
-    private void HitInit()
+    public void HitInit()
     {
-
+        Debug.Log("YOLOOOOOOOOOOOOOOOOOOOO");
+        animator.SetBool("Attacking", true);
+        
     }
 
     private void HitProcess()

@@ -46,7 +46,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 86.39001, y: 197.562, z: 20.284}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.96, y: 0.87}
+  m_AnchoredPosition: {x: 2.960022, y: 0.8699951}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5013735242415135062
@@ -692,12 +692,12 @@ PrefabInstance:
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_text
-      value: 'Pulse to attract ducks / hold to scare humans '
+      value: 'Press to attract ducks / hold to scare humans '
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontSize
-      value: 6.8
+      value: 6.75
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}

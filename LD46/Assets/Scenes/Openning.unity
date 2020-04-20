@@ -1993,7 +1993,7 @@ PrefabInstance:
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_text
-      value: Made it by
+      value: Created by
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
