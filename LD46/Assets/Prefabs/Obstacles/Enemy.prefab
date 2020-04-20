@@ -45,6 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cc782f1ee88db4083252c68a255d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shoutsSound:
+  - {fileID: 8300000, guid: 9a264409dc67b8e4d8acb01d0d2e1d2d, type: 3}
+  - {fileID: 8300000, guid: 9f4c4d8c68aefda49afb4b990bbe531f, type: 3}
+  - {fileID: 8300000, guid: f7de608a8a5a7e94e99d2d8b6469350d, type: 3}
+  - {fileID: 8300000, guid: 82d9f4e1ebccf264286e020fb0077549, type: 3}
+  - {fileID: 8300000, guid: 14ed66c50283bf345bce8c9d7d439aa8, type: 3}
+  attackSound:
+  - {fileID: 8300000, guid: 25fffc1d83741ae4a90aa7bc9424e14f, type: 3}
+  - {fileID: 8300000, guid: 80e681b33c771a749a802595470ddad1, type: 3}
   waypoints: {fileID: 4402479709840811545}
   target: {fileID: 0}
 --- !u!195 &2963059273931340549

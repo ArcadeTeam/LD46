@@ -8,6 +8,10 @@ public class EnemyController : MonoBehaviour
     enum State { Idle, Patrol, Chase, Hit }
     private State currentState;
 
+    [Header("Sounds")]
+    public AudioClip[] shoutsSound;
+    public AudioClip[] attackSound;
+    private AudioSource audio;
 
     [Header("Patrol")]
     private float walkSpeed;
@@ -31,6 +35,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
@@ -89,6 +94,7 @@ public class EnemyController : MonoBehaviour
     private void ChaseInit()
     {
         //Debug.Log("ChaseInit");
+        audio.PlayOneShot(shoutsSound[Random.Range(0, shoutsSound.Length)]);
         animator.SetBool("Running", true);
         agent.isStopped = false;
         agent.speed = walkSpeed * 2;
@@ -106,10 +112,15 @@ public class EnemyController : MonoBehaviour
         animator.SetBool("Running", false);
         animator.SetBool("Attacking", true);
         agent.isStopped = true;
+        Invoke("HitSound", 1f);
         Invoke("HitProcess", 2f);
         currentState = State.Hit;
     }
 
+    private void HitSound()
+    {
+        audio.PlayOneShot(attackSound[Random.Range(0, attackSound.Length)]);
+    }
     private void HitProcess()
     {
         isHitting = false;
