@@ -17871,12 +17871,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1574383682}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2106218126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3908704436396935920, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1917270950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2106218131 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3908704436396935923, guid: 20b0a0ec10ab1474cad6b1d8691c619d,
     type: 3}
   m_PrefabInstance: {fileID: 1917270950}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &2106218132
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106218126}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2118605218
 GameObject:
   m_ObjectHideFlags: 0
@@ -18982,6 +19000,11 @@ PrefabInstance:
       propertyPath: winText
       value: 
       objectReference: {fileID: 1391966098}
+    - target: {fileID: 7454148569197266073, guid: 8d218829c98e20e45891195b066660d0,
+        type: 3}
+      propertyPath: speakBubble
+      value: 
+      objectReference: {fileID: 2106218126}
     - target: {fileID: 7454148569197266074, guid: 8d218829c98e20e45891195b066660d0,
         type: 3}
       propertyPath: m_LocalPosition.x
