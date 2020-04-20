@@ -6,8 +6,9 @@ public class Honk : SpeakBubbles
 {
     GameObject player;
 
-    void Start() {
-        player = GameObject.Find("DuckPlayer");
+    void Start()
+    {
+        player = transform.parent.gameObject;
     }
 
     // Update is called once per frame

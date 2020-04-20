@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1878984115125796247, guid: c9114823804c6fa4fae143f9893f2ad2,
         type: 3}
       propertyPath: m_Name
-      value: Baby duck (1)
+      value: Baby duck (1) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4344788380947231142, guid: c9114823804c6fa4fae143f9893f2ad2,
         type: 3}
@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 5689730855703319085, guid: c9114823804c6fa4fae143f9893f2ad2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.83
+      value: 7.7
       objectReference: {fileID: 0}
     - target: {fileID: 5689730855703319085, guid: c9114823804c6fa4fae143f9893f2ad2,
         type: 3}
@@ -30,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 5689730855703319085, guid: c9114823804c6fa4fae143f9893f2ad2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 88.69
+      value: 27.720001
       objectReference: {fileID: 0}
     - target: {fileID: 5689730855703319085, guid: c9114823804c6fa4fae143f9893f2ad2,
         type: 3}
@@ -71,6 +71,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8984328882702280011, guid: c9114823804c6fa4fae143f9893f2ad2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9114823804c6fa4fae143f9893f2ad2, type: 3}

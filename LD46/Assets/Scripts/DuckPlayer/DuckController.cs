@@ -164,7 +164,7 @@ public class DuckController : Duck
                 if (Time.realtimeSinceStartup - honkStart <= 0.25f)
                 {
                     honk.SetActive(true);
-                    audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/babiesHonk"));
+                    audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/callingHonk"));
                     StartCoroutine(disableHonk(0.5f));
                     foreach (BabyDuckController baby in nearBabies)
                     {
