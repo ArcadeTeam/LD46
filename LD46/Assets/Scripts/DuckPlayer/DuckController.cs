@@ -38,6 +38,7 @@ public class DuckController : Duck
     private float honkStart = 0f;
 
     private AudioSource audio;
+    private AudioSource feetAudio;
     private Animator animator;
 
     GameManager gameManager;
@@ -47,6 +48,7 @@ public class DuckController : Duck
         SprintSpeed = Speed * 2f;
         honk = transform.Find("Honk").gameObject;
         audio = GetComponent<AudioSource>();
+        feetAudio = transform.Find("feetSound").GetComponent<AudioSource>();
         honk.SetActive(false);
         nearBabies = new HashSet<BabyDuckController>();
         cameraFollower = Camera.main.GetComponent<CameraFollower>();
@@ -132,6 +134,17 @@ public class DuckController : Duck
                 isSprinting = false;
                 rotationSpeed = 4f;
             }
+            //feet audio logic
+            if (_isGrounded && orientatedInput.magnitude > 0 && !feetAudio.isPlaying)
+            {
+                feetAudio.loop = false;
+                feetAudio.clip = (AudioClip)Resources.Load("sounds/duck/MUM_FOOTSTEP_" + (1 + (int)(Random.value * 4)));
+                feetAudio.Play();
+            }
+            if (feetAudio.isPlaying && !(_isGrounded && orientatedInput.magnitude > 0) )
+            {
+                feetAudio.Stop();
+            }
 
 
 
@@ -151,7 +164,7 @@ public class DuckController : Duck
                     if (!audio.isPlaying)
                     {
                         audio.loop = true;
-                        audio.clip = (AudioClip) Resources.Load("sounds/honk/DUCK_ANGRY_" + (1 + (int)(Random.value * 4)));
+                        audio.clip = (AudioClip) Resources.Load("sounds/duck/DUCK_ANGRY_" + (1 + (int)(Random.value * 4)));
                         audio.Play();
                     }
                     animator.SetBool("Honking", true);
@@ -165,7 +178,7 @@ public class DuckController : Duck
                 if (Time.realtimeSinceStartup - honkStart <= 0.25f)
                 {
                     honk.SetActive(true);
-                    audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/DUCK_WORRIED_"+(1+(int)(Random.value*4))));
+                    audio.PlayOneShot((AudioClip)Resources.Load("sounds/duck/DUCK_WORRIED_"+(1+(int)(Random.value*4))));
                     StartCoroutine(disableHonk(0.5f));
                     foreach (BabyDuckController baby in nearBabies)
                     {
