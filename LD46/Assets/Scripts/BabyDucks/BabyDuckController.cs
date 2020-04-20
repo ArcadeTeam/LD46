@@ -50,7 +50,7 @@ public class BabyDuckController : Duck
     {
         waitingForPlayLostSound = true;
         yield return new WaitForSeconds(waitTime);
-        audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/BABY_DUCK_LOST_" + (1 + (int)(Random.value * 4))));
+        audio.PlayOneShot((AudioClip)Resources.Load("sounds/duck/BABY_DUCK_LOST_" + (1 + (int)(Random.value * 4))));
         waitingForPlayLostSound = false;
     }
 
@@ -67,7 +67,7 @@ public class BabyDuckController : Duck
         yield return new WaitForSeconds(waitTime+Random.value*0.75f);
         honk.SetActive(true);
         audio.loop = true;
-        audio.clip = (AudioClip) Resources.Load("sounds/honk/BABY_DUCK_" + (1 + (int) (Random.value * 4)));
+        audio.clip = (AudioClip) Resources.Load("sounds/duck/BABY_DUCK_" + (1 + (int) (Random.value * 4)));
         audio.Play();
         StartCoroutine(disableHonk(0.75f + Random.value * 1f));
     }
