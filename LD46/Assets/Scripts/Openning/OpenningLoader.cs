@@ -13,16 +13,18 @@ public class OpenningLoader : MonoBehaviour
     private bool openningHasFinished = false;
 
     private void Start() {
-        StartCoroutine(LoadMainMenu());
+        
+        //StartCoroutine(LoadMainMenu());
     }
 
     void FixedUpdate() {
         time += Time.deltaTime;
         if(time >= timeBetweenTexts) {
             time = 0;
-            if (i == texts.Length - 1)
+            if (i == texts.Length - 1) {
                 openningHasFinished = true;
-            else {
+                SceneManager.LoadScene("MainMenu");
+            } else {
                 texts[i].SetActive(false);
                 ++i;
                 texts[i].SetActive(true);
@@ -30,7 +32,8 @@ public class OpenningLoader : MonoBehaviour
         }
     }
 
-    IEnumerator LoadMainMenu() {
+   /* IEnumerator LoadMainMenu() {
+
         yield return null;
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneToLoad);
@@ -49,5 +52,5 @@ public class OpenningLoader : MonoBehaviour
 
             yield return null;
         }
-    }
+    }*/
 }

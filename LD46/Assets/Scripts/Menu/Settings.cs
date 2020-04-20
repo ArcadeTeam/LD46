@@ -39,11 +39,11 @@ public class Settings : MonoBehaviour
         SetMusicVolume(musicVolume);
         if (PlayerPrefs.HasKey("sensibility")) sensibility = PlayerPrefs.GetFloat("sensibility");
         SetSensibility(sensibility);
-        if (PlayerPrefs.HasKey("quality")) quality = PlayerPrefs.GetInt("quality");
-        SetQuality(quality);
+        /*if (PlayerPrefs.HasKey("quality")) quality = PlayerPrefs.GetInt("quality");
+        SetQuality(quality);*/
         if (PlayerPrefs.HasKey("fullscreen")) fullscreen = System.Convert.ToBoolean(PlayerPrefs.GetInt("fullscreen"));
         SetFullscreen(fullscreen);
-
+        
         foreach (Resolution r in Screen.resolutions) {
             if(r.refreshRate == Screen.currentResolution.refreshRate)
                 resolutions.Add(r);
@@ -60,13 +60,13 @@ public class Settings : MonoBehaviour
     }
 
     private void SetVolumeOf(string mixerName, float value) {
-        float ret = 0f;
+        /*float ret = 0f;
 
         if (value <= 0.0001f) ret = Mathf.Log10(0.0001f) * 20;
         else if (value == 1.0f) ret = Mathf.Log10(0.9999f) * 20;
         else ret = Mathf.Log10(value) * 20;
 
-        audioMixer.SetFloat(mixerName, ret);
+        audioMixer.SetFloat(mixerName, ret);*/
     }
 
     public void SetMasterVolume(float value) {
