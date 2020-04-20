@@ -25,8 +25,8 @@ public class Duck : MonoBehaviour
         
         if (gameObject.CompareTag("Player") && !dead) {
             /* gameObject.GetComponent<Animator>().enabled = false;
-             gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-             GetComponent<Rigidbody>().freezeRotation = true;*/
+             gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);*/
+             GetComponent<Rigidbody>().freezeRotation = true;
             //GetComponent<CapsuleCollider>().enabled = false;
             GameObject.Find("DuckCamera").GetComponent<CameraFollower>().enabled = false;
             Debug.Log("EEEEEEh");
