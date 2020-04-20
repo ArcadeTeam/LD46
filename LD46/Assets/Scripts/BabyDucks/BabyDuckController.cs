@@ -17,6 +17,9 @@ public class BabyDuckController : Duck
     private GameObject honk;
     private AudioSource audio;
 
+    private bool lost = true;
+    private bool waitingForPlayLostSound = false;
+
     void Start() {
         honk = transform.Find("Honk").gameObject;
         audio = GetComponent<AudioSource>();
@@ -29,7 +32,8 @@ public class BabyDuckController : Duck
     void Update() {
         if (dead) return;
 
-        animator.SetBool("Running", agent.velocity.magnitude > 0f);           
+        animator.SetBool("Running", agent.velocity.magnitude > 0f);
+        if (lost && !audio.isPlaying && !waitingForPlayLostSound) StartCoroutine(lostSound(0.5f+Random.value));
 
         if (destination != null)
             agent.destination = destination.position;
@@ -42,8 +46,18 @@ public class BabyDuckController : Duck
         }
     }
 
-    public void GoWithMom(Transform newDestination) {
+    private IEnumerator lostSound(float waitTime)
+    {
+        waitingForPlayLostSound = true;
+        yield return new WaitForSeconds(waitTime);
+        audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/BABY_DUCK_LOST_" + (1 + (int)(Random.value * 4))));
+        waitingForPlayLostSound = false;
+    }
 
+    public void GoWithMom(Transform newDestination)
+    {
+
+        lost = false;
         StartCoroutine(startHonk(0.75f));
         distractionProbability = 0;
         destination = newDestination;
