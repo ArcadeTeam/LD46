@@ -27600,6 +27600,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrafficNodeB
       objectReference: {fileID: 0}
+    - target: {fileID: 621502115618586130, guid: 02bb8dab9f0657041a25ff7ed485c865,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 968382714716003848, guid: 02bb8dab9f0657041a25ff7ed485c865,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33905,6 +33910,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TrafficNodeA
+      objectReference: {fileID: 0}
+    - target: {fileID: 6083980692130247174, guid: ddfb7ce91bae40f439157d563eb85313,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddfb7ce91bae40f439157d563eb85313, type: 3}
