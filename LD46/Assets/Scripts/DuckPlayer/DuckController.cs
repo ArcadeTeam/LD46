@@ -39,6 +39,8 @@ public class DuckController : Duck
     private AudioSource audio;
     private Animator animator;
 
+    GameManager gameManager;
+
     void Start()
     {
         SprintSpeed = Speed * 2f;
@@ -50,6 +52,7 @@ public class DuckController : Duck
         _body.useGravity = false;
         resetDuckAlignment();
         animator = gameObject.GetComponent<Animator>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void resetDuck(Vector3 position)
@@ -251,6 +254,8 @@ public class DuckController : Duck
     public void AddBaby(BabyDuckController baby)
     {
         nearBabies.Add(baby);
+        if (nearBabies.Count == gameManager.duckWinCount)
+            gameManager.ShowBubbles(gameManager.eggsBubble);
     }
 
     public void RemoveBaby(BabyDuckController baby)

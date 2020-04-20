@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     //public AudioManager audioManager;
 
     public Transform spawner;
-    private int duckWinCount;
+    public int duckWinCount;
     private bool win = false;
 
     [SerializeField] Image gameOverPanel;
@@ -23,14 +23,16 @@ public class GameManager : MonoBehaviour
     GameObject player;
     GameObject playerCamera;
     public GameObject dancingScene;
-    public GameObject speakBubble;
+    public GameObject ducksInfoBubble;
+    public GameObject eggsBubble;
 
     void Start() {
-        duckWinCount = 3;//spawner.childCount;
+        duckWinCount = 5;//spawner.childCount;
         player = GameObject.Find("DuckPlayer");
         playerCamera = GameObject.Find("DuckCamera");
-        speakBubble.SetActive(false);
-        ShowDucksInfoBubbles();
+        ducksInfoBubble.SetActive(false);
+        eggsBubble.SetActive(false);
+        ShowBubbles(ducksInfoBubble);
     }
 
     void Update() {
@@ -48,14 +50,14 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WinCorroutine());
             //SceneManager.LoadScene("MainMenu");
         } else {
-            ShowDucksInfoBubbles();
+            ShowBubbles(ducksInfoBubble);
         }
     }
 
-    void ShowDucksInfoBubbles() {
+    public void ShowBubbles(GameObject bubbles) {
         IEnumerator Show() {
-            speakBubble.SetActive(true);
-            CanvasGroup cg = speakBubble.GetComponent<CanvasGroup>();
+            bubbles.SetActive(true);
+            CanvasGroup cg = bubbles.GetComponent<CanvasGroup>();
             cg.alpha = 0;
         
             for (float t = 0.0f; t < 7;) {
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
                 cg.alpha = t;
                 yield return null;
             }
-            speakBubble.SetActive(false);
+            bubbles.SetActive(false);
         }
 
         StartCoroutine(Show());
