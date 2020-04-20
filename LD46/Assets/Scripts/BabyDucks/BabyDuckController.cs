@@ -14,7 +14,13 @@ public class BabyDuckController : Duck
     public Material[] skins;
     private SkinnedMeshRenderer skinnedMesh;
 
+    private GameObject honk;
+    private AudioSource audio;
+
     void Start() {
+        honk = transform.Find("Honk").gameObject;
+        audio = GetComponent<AudioSource>();
+        honk.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
         skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
         skinnedMesh.material = skins[Random.Range(0, skins.Length)];
@@ -37,8 +43,23 @@ public class BabyDuckController : Duck
     }
 
     public void GoWithMom(Transform newDestination) {
+
+        StartCoroutine(startHonk(0.75f));
         distractionProbability = 0;
         destination = newDestination;
+    }
+    private IEnumerator startHonk(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime+Random.value*0.75f);
+        honk.SetActive(true);
+        audio.PlayOneShot((AudioClip)Resources.Load("sounds/honk/babyDuckHonk"));
+        StartCoroutine(disableHonk(0.5f));
+    }
+
+    private IEnumerator disableHonk(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        honk.SetActive(false);
     }
 
     public void HumanDetected(Vector3 humanPosition)
