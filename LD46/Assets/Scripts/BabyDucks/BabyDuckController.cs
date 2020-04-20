@@ -84,5 +84,7 @@ public class BabyDuckController : Duck
         Vector3 dir = transform.position - humanPosition;
         agent.destination = humanPosition + dir * 3;
         destination = null;
+        lost = true;
+        lostSound(1f);
     }
 }
