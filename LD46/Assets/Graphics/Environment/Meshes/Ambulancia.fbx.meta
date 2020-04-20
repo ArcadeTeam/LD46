@@ -3,7 +3,57 @@ guid: 7838c8237853b0e47b4d9de7fd3a3b07
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 02 - Default3
+    second: {fileID: 2100000, guid: 61df89e82dd82674ea1bb18a7dd900c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 04 - Default3
+    second: {fileID: 2100000, guid: 201da1132749b754487986f6a8416653, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 05 - Default3
+    second: {fileID: 2100000, guid: 8cf49a9ff504cc74f87ec44c78459c09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 06 - Default3
+    second: {fileID: 2100000, guid: 8f927b51e3545c74bb90232e5a4647fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 07 - Default1
+    second: {fileID: 2100000, guid: c81400926b8ebbf49abce05346dfc035, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: defaultMat1
+    second: {fileID: 2100000, guid: 5d51ea952c09b48499d469a292719219, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert90
+    second: {fileID: 2100000, guid: 393494a7bf42dfd4a9c36c16a69dc488, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert91
+    second: {fileID: 2100000, guid: 9e76abec20d524846942674735e825e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert92
+    second: {fileID: 2100000, guid: ec30e44e3ff9375489ed96d4e9d6688e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert93
+    second: {fileID: 2100000, guid: 8cf49a9ff504cc74f87ec44c78459c09, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
