@@ -15,12 +15,14 @@ public class CameraFollower : MonoBehaviour
 
     private List<Vector3> filteredPositions = new List<Vector3>();
 
+    private Dictionary<GameObject, Material[]> oldMaterials = new Dictionary<GameObject, Material[]>();
 
     private List<GameObject> hits = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
         duckObject = FindObjectOfType<DuckController>().gameObject;
+
         cameraPositionRelativeFinal = cameraPositionRelative;
     }
 
@@ -36,13 +38,18 @@ public class CameraFollower : MonoBehaviour
 
 
         var newHits = Physics.RaycastAll(duckObject.transform.position, (this.transform.position - duckObject.transform.position), Vector3.Distance(duckObject.transform.position, this.transform.position)).Select(i => i.transform.gameObject).ToList();
-        
-        List<GameObject> hits2 = Physics.RaycastAll(topLeft.origin+ topLeft.direction * Vector3.Distance(this.transform.position, duckObject.transform.position), topLeft.origin, Vector3.Distance(this.transform.position, duckObject.transform.position)).Select(i => i.transform.gameObject).ToList();
-        List<GameObject> hits3 = Physics.RaycastAll(topRight.origin + topRight.direction * Vector3.Distance(this.transform.position, duckObject.transform.position), topRight.origin, Vector3.Distance(this.transform.position, duckObject.transform.position)).Select(i => i.transform.gameObject).ToList();
-        List<GameObject> hits4 = Physics.RaycastAll(botRight.origin + botRight.direction * Vector3.Distance(this.transform.position, duckObject.transform.position), botRight.origin, Vector3.Distance(this.transform.position, duckObject.transform.position)).Select(i => i.transform.gameObject).ToList();
-        List<GameObject> hits5 = Physics.RaycastAll(botLeft.origin + botLeft.direction * Vector3.Distance(this.transform.position, duckObject.transform.position), botLeft.origin, Vector3.Distance(this.transform.position, duckObject.transform.position)).Select(i => i.transform.gameObject).ToList();
 
+        var size = duckObject.GetComponent<CapsuleCollider>().height * 2;
+        var newPos = duckObject.transform.position +new Vector3(0, 0, 0);
+        var hits2 = Physics.RaycastAll(newPos, (this.transform.position - newPos), Vector3.Distance(newPos, this.transform.position)).Select(i => i.transform.gameObject).ToList();
+        newPos = duckObject.transform.position + new Vector3(size, 0, 0);
+        var hits3 = Physics.RaycastAll(newPos, (this.transform.position - newPos), Vector3.Distance(newPos, this.transform.position)).Select(i => i.transform.gameObject).ToList();
+        newPos = duckObject.transform.position + new Vector3(-size, 0, 0);
+        var hits4 = Physics.RaycastAll(newPos, (this.transform.position - newPos), Vector3.Distance(newPos, this.transform.position)).Select(i => i.transform.gameObject).ToList();
+        newPos = duckObject.transform.position + new Vector3(0, 0, size);
+        var hits5 = Physics.RaycastAll(newPos, (this.transform.position - newPos), Vector3.Distance(newPos, this.transform.position)).Select(i => i.transform.gameObject).ToList();
 
+ 
         var realHits = newHits.Where(hit =>
             {
                 var corners = 0f;
@@ -50,20 +57,28 @@ public class CameraFollower : MonoBehaviour
                 if (hits3.Contains(hit)) corners++;
                 if (hits4.Contains(hit)) corners++;
                 if (hits5.Contains(hit)) corners++;
-                return (corners > 0);
+                return (corners > 2);
             }
         ).ToList();
-
-        //Debug.Log(realHits.Count);
-        //newHits.ForEach(hit => Debug.Log(hit.name));
-
 
         realHits.ForEach(hit =>
         {
             Renderer r = hit.GetComponent<Renderer>();
             if (r)
             {
-                r.enabled = false;
+                if (!oldMaterials.ContainsKey(hit))
+                {
+                    oldMaterials[hit] = r.materials;
+                }
+
+                Material[] mats2 =new Material[r.materials.Length];
+                for (var i = 0; i < r.materials.Length; i++)
+                {
+
+                    var newMaterial = GetComponentInChildren<MeshRenderer>().material;
+                    mats2[i] = newMaterial;
+                }
+                r.materials = mats2;
             }
         });
         
@@ -74,7 +89,11 @@ public class CameraFollower : MonoBehaviour
                 Renderer r = hit.GetComponent<Renderer>();
                 if (r)
                 {
-                    r.enabled = true;
+                    if (oldMaterials.ContainsKey(hit))
+                    {
+                        r.materials = oldMaterials[hit];
+                        oldMaterials.Remove(hit);
+                    }
                 }
             }
         }
