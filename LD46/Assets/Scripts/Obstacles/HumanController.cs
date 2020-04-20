@@ -15,7 +15,7 @@ public class HumanController : MonoBehaviour
     public bool debugMode = false;
 
     public BoxCollider area;
-    private float walkRadius;
+    private float walkRadius = 30;
     private float changePathTimeout = 5f;
     private float walkThreshold = 0.1f;
 
@@ -55,7 +55,6 @@ public class HumanController : MonoBehaviour
         defaultSpeed = agent.speed;
         agent.destination = GetRandomPoint();
         animator = GetComponent<Animator>();
-        walkRadius = Random.Range(10f, 30f);
         lastPosition = transform.position;
         setState(CharState.Idle);
         bones.SetActive(false);
@@ -114,7 +113,7 @@ public class HumanController : MonoBehaviour
         //pass from scared to running
         if (currentState == CharState.Scared && timeInThisState() > 2f)
         {
-            var nextPosition = transform.position + (transform.position - duckPosition).normalized * 10f;
+            var nextPosition = transform.position + (transform.position - duckPosition).normalized * walkRadius;
 
             lastPathChange = Time.realtimeSinceStartup;
             lastPosition = transform.position;
@@ -135,7 +134,7 @@ public class HumanController : MonoBehaviour
         {
             if (agent.remainingDistance == Mathf.Infinity 
                 || (!agent.pathPending && agent.remainingDistance < walkThreshold)
-                || timeInThisState() > 5f)
+                || timeInThisState() > 15f)
             {
                 animator.SetBool("Running", false);
                 setState(CharState.Idle);
