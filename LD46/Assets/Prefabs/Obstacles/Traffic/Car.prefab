@@ -175,7 +175,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0.5
-  m_WalkableMask: 16
+  m_WalkableMask: 55
   m_ObstacleAvoidanceType: 4
 --- !u!54 &1431248048221171222
 Rigidbody:

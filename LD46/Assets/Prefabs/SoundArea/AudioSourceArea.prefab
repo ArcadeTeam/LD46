@@ -449,6 +449,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: RiverAudioSource
       objectReference: {fileID: 0}
+    - target: {fileID: 6755977759835920776, guid: 7c0683fb7cc3f9c4898ce962ec7e8db2,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -3199159552341468224, guid: 8681b25c233cf9644987fde48a38fadd,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c0683fb7cc3f9c4898ce962ec7e8db2, type: 3}
 --- !u!4 &2075226011584659478 stripped
