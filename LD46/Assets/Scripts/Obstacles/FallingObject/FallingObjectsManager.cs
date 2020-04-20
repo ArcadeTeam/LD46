@@ -13,7 +13,7 @@ public class FallingObjectsManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("BabyDuck")) {
+        if (other.CompareTag("Player")) {
             InstanceFallingObject(other.transform.position);
         }
     }

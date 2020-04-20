@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
     private void PatrolInit()
     {
-        Debug.Log("PatrolInit");
+        //Debug.Log("PatrolInit");
         animator.SetBool("Running", false);
         agent.isStopped = false;
         agent.speed = walkSpeed;
@@ -88,7 +88,7 @@ public class EnemyController : MonoBehaviour
 
     private void ChaseInit()
     {
-        Debug.Log("ChaseInit");
+        //Debug.Log("ChaseInit");
         animator.SetBool("Running", true);
         agent.isStopped = false;
         agent.speed = walkSpeed * 2;
@@ -172,7 +172,7 @@ public class EnemyController : MonoBehaviour
 
     public void TargetDetection(Transform target)
     {
-        Debug.Log("TargetDetection: " + target);
+        //Debug.Log("TargetDetection: " + target);
         this.target = target;
     }
 
