@@ -39,6 +39,15 @@ public class HumanController : MonoBehaviour
     private float timeToStartWalking;
     private float timeTalking;
 
+    private AudioSource audio;
+    private AudioClip[] shouts;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+        shouts = Resources.LoadAll<AudioClip>("sounds/human");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -215,6 +224,7 @@ public class HumanController : MonoBehaviour
                 agent.isStopped = false;
                 break;
             case CharState.Scared:
+                audio.PlayOneShot(getRandomShout());
                 animator.SetBool("Scared", true);
                 animator.speed = 1f;
                 agent.isStopped = true;
@@ -283,4 +293,10 @@ public class HumanController : MonoBehaviour
         this.enabled = false;
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
+
+    private AudioClip getRandomShout()
+    {
+        return shouts[Random.Range(0, shouts.Length)];
+    }
+
 }
