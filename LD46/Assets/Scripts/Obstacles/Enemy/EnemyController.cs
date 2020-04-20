@@ -25,6 +25,9 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private NavMeshAgent agent;
 
+    [Header("Hit")]
+    private bool isHitting;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,16 +56,12 @@ public class EnemyController : MonoBehaviour
         switch (currentState)
         {
             case State.Patrol:
-                animator.SetBool("Running", false);
                 PatrolProcess();
                 break;
             case State.Chase:
-                animator.SetBool("Running", true);
                 ChaseProcess();
                 break;
             case State.Hit:
-                animator.SetBool("Running", false);
-                ChaseProcess();
                 break;
             default:
                 Debug.LogError("Error State!!");
@@ -75,9 +74,11 @@ public class EnemyController : MonoBehaviour
     private void PatrolInit()
     {
         Debug.Log("PatrolInit");
+        animator.SetBool("Running", false);
+        agent.isStopped = false;
         agent.speed = walkSpeed;
-        currentState = State.Patrol;
         agent.SetDestination(nextPosition.position);
+        currentState = State.Patrol;
     }
 
     private void PatrolProcess()
@@ -88,6 +89,8 @@ public class EnemyController : MonoBehaviour
     private void ChaseInit()
     {
         Debug.Log("ChaseInit");
+        animator.SetBool("Running", true);
+        agent.isStopped = false;
         agent.speed = walkSpeed * 2;
         currentState = State.Chase;
     }
@@ -100,14 +103,17 @@ public class EnemyController : MonoBehaviour
 
     public void HitInit()
     {
-        Debug.Log("YOLOOOOOOOOOOOOOOOOOOOO");
+        animator.SetBool("Running", false);
         animator.SetBool("Attacking", true);
-        
+        agent.isStopped = true;
+        Invoke("HitProcess", 2f);
+        currentState = State.Hit;
     }
 
     private void HitProcess()
     {
-
+        isHitting = false;
+        animator.SetBool("Attacking", false);
     }
 
     private void ExitCondition()
@@ -121,6 +127,17 @@ public class EnemyController : MonoBehaviour
             case State.Chase:
                 if (target == null)
                     PatrolInit();
+                else if (isHitting)
+                    HitInit();
+                break;
+            case State.Hit:
+                if (!isHitting)
+                {
+                    if (target != null)
+                        ChaseInit();
+                    else if (target == null)
+                        PatrolInit();
+                }
                 break;
             default:
                 Debug.LogError("Está malito D':");
@@ -157,6 +174,11 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("TargetDetection: " + target);
         this.target = target;
+    }
+
+    public void Hit()
+    {
+        isHitting = true;
     }
 
 }
