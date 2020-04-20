@@ -116,6 +116,6 @@ public class GameManager : MonoBehaviour
             gameOverText.color = new Color(255f, 255f, 255f, t / (fadeTime));
             yield return null;
         }
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("MainMenu");
     }
 }
