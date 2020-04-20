@@ -10260,6 +10260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splash: {fileID: 8040615491773429753}
+  rotationSpeed: 4
   Ground:
     serializedVersion: 2
     m_Bits: 0

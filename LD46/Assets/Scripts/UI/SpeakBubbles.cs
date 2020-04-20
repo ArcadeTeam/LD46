@@ -8,6 +8,8 @@ public class SpeakBubbles : MonoBehaviour
     public Image firstImg;
     public Image secondImg;
     public float time;
+    public Transform targetPos;
+    public Vector3 offsetPos = Vector3.zero;
 
     float counter = 0.0f;
 
@@ -16,6 +18,10 @@ public class SpeakBubbles : MonoBehaviour
     }
     void Update() {
         transform.rotation = Camera.main.transform.rotation;
+
+        if(targetPos != null) {
+            transform.position = targetPos.position + offsetPos;
+        }
 
         counter += Time.deltaTime;
         if(counter > time) {

@@ -23,11 +23,14 @@ public class GameManager : MonoBehaviour
     GameObject player;
     GameObject playerCamera;
     public GameObject dancingScene;
+    public GameObject speakBubble;
 
     void Start() {
         duckWinCount = 3;//spawner.childCount;
         player = GameObject.Find("DuckPlayer");
         playerCamera = GameObject.Find("DuckCamera");
+        speakBubble.SetActive(false);
+        ShowDucksInfoBubbles();
     }
 
     void Update() {
@@ -44,7 +47,31 @@ public class GameManager : MonoBehaviour
             win = true;
             StartCoroutine(WinCorroutine());
             //SceneManager.LoadScene("MainMenu");
+        } else {
+            ShowDucksInfoBubbles();
         }
+    }
+
+    void ShowDucksInfoBubbles() {
+        IEnumerator Show() {
+            speakBubble.SetActive(true);
+            CanvasGroup cg = speakBubble.GetComponent<CanvasGroup>();
+            cg.alpha = 0;
+        
+            for (float t = 0.0f; t < 7;) {
+                t += Time.deltaTime;
+                cg.alpha = t;
+                yield return null;
+            }
+            for (float t = 1f; t > 0f;) {
+                t -= Time.deltaTime;
+                cg.alpha = t;
+                yield return null;
+            }
+            speakBubble.SetActive(false);
+        }
+
+        StartCoroutine(Show());
     }
 
     IEnumerator WinCorroutine() {
