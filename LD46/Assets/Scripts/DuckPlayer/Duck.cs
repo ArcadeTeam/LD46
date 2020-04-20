@@ -9,12 +9,14 @@ public class Duck : MonoBehaviour
     protected bool dead = false;
 
     public ParticleSystem splash;
+    private AudioSource splashAudio;
 
     protected bool inWater = false;
     public GameObject featherParticleEffect;
 
     void Awake()
     {
+        splashAudio = splash.GetComponent<AudioSource>();
         splash.Stop();
         _body = GetComponent<Rigidbody>();
     }
@@ -61,5 +63,6 @@ public class Duck : MonoBehaviour
     private void WaterSplash()
     {
         splash.Play();
+        splashAudio.Play();
     }
 }
