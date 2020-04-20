@@ -16,13 +16,18 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Image gameOverPanel;
     [SerializeField] TMPro.TMP_Text gameOverText;
+    [SerializeField] Image winPanel;
+    [SerializeField] TMPro.TMP_Text winText;
     [SerializeField] float fadeTime = 2f;
 
     GameObject player;
+    GameObject playerCamera;
+    public GameObject dancingScene;
 
     void Start() {
         duckWinCount = 3;//spawner.childCount;
         player = GameObject.Find("DuckPlayer");
+        playerCamera = GameObject.Find("DuckCamera");
     }
 
     void Update() {
@@ -37,15 +42,44 @@ public class GameManager : MonoBehaviour
         if (!win && babyCount >= duckWinCount)
         {
             win = true;
-            SceneManager.LoadScene("MainMenu");
+            StartCoroutine(WinCorroutine());
+            //SceneManager.LoadScene("MainMenu");
         }
     }
 
-    public void GameOver() {
-        StartCoroutine(Fading());
+    IEnumerator WinCorroutine() {
+        winPanel.gameObject.SetActive(true);
+        winText.gameObject.SetActive(false);
+        for (float t = 0.0f; t < 1;) {
+            t += Time.deltaTime;
+            winPanel.color = new Color(0f, 0f, 0f, t / (1));
+            yield return null;
+        }
+        dancingScene.SetActive(true);
+        player.SetActive(false);
+        playerCamera.SetActive(false);
+        for (float t = 1.0f; t > 0.0f;) {
+            t -= Time.deltaTime;
+            winPanel.color = new Color(0f, 0f, 0f, t / (1));
+            //winText.color = new Color(239f, 184f, 16f, t / (-fadeTime));
+            yield return null;
+        }
+        winText.gameObject.SetActive(true);
+        for (float t = 0.0f; t < 10f;) {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        dancingScene.SetActive(false);
+        winPanel.gameObject.SetActive(false);
+        playerCamera.SetActive(true);
+        player.SetActive(true);
     }
 
-    IEnumerator Fading() {
+    public void GameOver() {
+        StartCoroutine(GameOverCorroutine());
+    }
+
+    IEnumerator GameOverCorroutine() {
         gameOverPanel.gameObject.SetActive(true);
         for (float t = 0.0f; t < fadeTime;) {
             t += Time.deltaTime;
