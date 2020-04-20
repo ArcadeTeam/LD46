@@ -12,6 +12,7 @@ public class CameraFollower : MonoBehaviour
     public float cameraDistance = 6f;
     public float cameraSpeed = 0.015f;
     public Vector3 cameraPositionRelative = new Vector3(-1f, -1f, 1f);
+    Vector3 cameraPositionRelativeFinal;
 
     private List<Vector3> filteredPositions = new List<Vector3>();
 
@@ -21,6 +22,7 @@ public class CameraFollower : MonoBehaviour
     void Start()
     {
         duckObject = FindObjectOfType<DuckController>().gameObject;
+        cameraPositionRelativeFinal = cameraPositionRelative;
     }
 
     void Update()
@@ -82,12 +84,45 @@ public class CameraFollower : MonoBehaviour
 
     }
 
+    float minFov = 15f;
+    float maxFov = 90f;
+    float sensitivity = 10f;
+
+    /*void LateUpdate() {
+        float fov = Camera.main.fieldOfView;
+        fov += Input.GetAxis("Mouse ScrollWheel") * sensitivity;
+        fov = Mathf.Clamp(fov, minFov, maxFov);
+        Camera.main.fieldOfView = fov;
+    }*/
+
+    private void LateUpdate() {
+        float ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");
+        float JoystickChange = Input.GetAxis("CameraXBOX");
+        Debug.Log(JoystickChange);
+        if (ScrollWheelChange != 0 || JoystickChange != 0) {
+            float R = ScrollWheelChange * -8;
+            if (JoystickChange != 0)
+                R = JoystickChange;
+            float PosX = Camera.main.transform.eulerAngles.x + 90;
+            float PosY = -1 * (Camera.main.transform.eulerAngles.y - 90);
+            PosX = PosX / 180 * Mathf.PI;
+            PosY = PosY / 180 * Mathf.PI;
+            float X = R * Mathf.Sin(PosX) * Mathf.Cos(PosY);
+            float Z = R * Mathf.Sin(PosX) * Mathf.Sin(PosY);
+            float Y = R * Mathf.Cos(PosX);
+            float CamX = Camera.main.transform.position.x;
+            float CamY = Camera.main.transform.position.y;
+            float CamZ = Camera.main.transform.position.z;
+            /*Camera.main.transform.position*/
+            cameraPositionRelativeFinal = cameraPositionRelative + new Vector3(X, Y, Z);//Move the main camera
+        }
+    }
 
     public void fastMoveToDuck()
     {
-        transform.forward = cameraPositionRelative;
-        var distance = cameraPositionRelative.magnitude * cameraDistance;
-        Vector3 desiredCameraLocation = duckObject.transform.position - cameraPositionRelative * distance;
+        transform.forward = cameraPositionRelativeFinal;
+        var distance = cameraPositionRelativeFinal.magnitude * cameraDistance;
+        Vector3 desiredCameraLocation = duckObject.transform.position - cameraPositionRelativeFinal * distance;
         Vector3 difference = (transform.position - desiredCameraLocation);
         transform.position -= difference;
     }
@@ -95,9 +130,9 @@ public class CameraFollower : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.forward = cameraPositionRelative;
-        var distance = cameraPositionRelative.magnitude * cameraDistance;
-        Vector3 desiredCameraLocation = duckObject.transform.position - cameraPositionRelative* distance;
+        transform.forward = cameraPositionRelativeFinal;
+        var distance = cameraPositionRelativeFinal.magnitude * cameraDistance;
+        Vector3 desiredCameraLocation = duckObject.transform.position - cameraPositionRelativeFinal * distance;
         Vector3 difference = (transform.position - desiredCameraLocation);
         transform.position -= difference * cameraSpeed;
     }
