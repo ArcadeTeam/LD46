@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AreaAudioSource : MonoBehaviour
 {
-
+    public float maxVolume = 1f;
     private AudioSource audio;
     private bool entering = false;
 
@@ -18,7 +18,7 @@ public class AreaAudioSource : MonoBehaviour
     {
         if (entering)
         {
-            audio.volume += Time.deltaTime;
+            audio.volume = Mathf.Min(audio.volume + Time.deltaTime, maxVolume);
         } else
         {
             audio.volume -= Time.deltaTime;
@@ -40,6 +40,5 @@ public class AreaAudioSource : MonoBehaviour
             entering = false;
         }
     }
-
 
 }
