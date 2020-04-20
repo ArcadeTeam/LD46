@@ -84,21 +84,9 @@ public class CameraFollower : MonoBehaviour
 
     }
 
-    float minFov = 15f;
-    float maxFov = 90f;
-    float sensitivity = 10f;
-
-    /*void LateUpdate() {
-        float fov = Camera.main.fieldOfView;
-        fov += Input.GetAxis("Mouse ScrollWheel") * sensitivity;
-        fov = Mathf.Clamp(fov, minFov, maxFov);
-        Camera.main.fieldOfView = fov;
-    }*/
-
     private void LateUpdate() {
         float ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");
         float JoystickChange = Input.GetAxis("CameraXBOX");
-        Debug.Log(JoystickChange);
         if (ScrollWheelChange != 0 || JoystickChange != 0) {
             float R = ScrollWheelChange * -8;
             if (JoystickChange != 0)
@@ -110,11 +98,7 @@ public class CameraFollower : MonoBehaviour
             float X = R * Mathf.Sin(PosX) * Mathf.Cos(PosY);
             float Z = R * Mathf.Sin(PosX) * Mathf.Sin(PosY);
             float Y = R * Mathf.Cos(PosX);
-            float CamX = Camera.main.transform.position.x;
-            float CamY = Camera.main.transform.position.y;
-            float CamZ = Camera.main.transform.position.z;
-            /*Camera.main.transform.position*/
-            cameraPositionRelativeFinal = cameraPositionRelative + new Vector3(X, Y, Z);//Move the main camera
+            cameraPositionRelativeFinal = cameraPositionRelative + new Vector3(X, Y, Z);
         }
     }
 
