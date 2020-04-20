@@ -135,7 +135,7 @@ public class DuckController : Duck
                 rotationSpeed = 4f;
             }
             //feet audio logic
-            if (_isGrounded && orientatedInput.magnitude > 0 && !feetAudio.isPlaying)
+            if (_isGrounded && !inWater && orientatedInput.magnitude > 0 && !feetAudio.isPlaying)
             {
                 feetAudio.loop = false;
                 feetAudio.clip = (AudioClip)Resources.Load("sounds/duck/MUM_FOOTSTEP_" + (1 + (int)(Random.value * 4)));

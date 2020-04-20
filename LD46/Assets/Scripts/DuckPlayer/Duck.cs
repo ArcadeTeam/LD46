@@ -9,6 +9,7 @@ public class Duck : MonoBehaviour
 
     public ParticleSystem splash;
 
+    protected bool inWater = false;
 
     void Awake()
     {
@@ -35,7 +36,19 @@ public class Duck : MonoBehaviour
 
     }
 
-    public void WaterSplash()
+    public void EnterWater()
+    {
+        inWater = true;
+        WaterSplash();
+    }
+
+    public void ExitWater()
+    {
+        inWater = false;
+        WaterSplash();
+    }
+
+    private void WaterSplash()
     {
         splash.Play();
     }
