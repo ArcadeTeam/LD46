@@ -21,7 +21,7 @@ public class Settings : MonoBehaviour
     [HideInInspector]
     public bool fullscreen = true;
     [HideInInspector]
-    public int quality;
+    public int quality = 5;
 
     public AudioMixer audioMixer;
 
@@ -39,8 +39,8 @@ public class Settings : MonoBehaviour
         SetMusicVolume(musicVolume);
         if (PlayerPrefs.HasKey("sensibility")) sensibility = PlayerPrefs.GetFloat("sensibility");
         SetSensibility(sensibility);
-        /*if (PlayerPrefs.HasKey("quality")) quality = PlayerPrefs.GetInt("quality");
-        SetQuality(quality);*/
+        if (PlayerPrefs.HasKey("quality")) quality = PlayerPrefs.GetInt("quality");
+        SetQuality(quality);
         if (PlayerPrefs.HasKey("fullscreen")) fullscreen = System.Convert.ToBoolean(PlayerPrefs.GetInt("fullscreen"));
         SetFullscreen(fullscreen);
         
